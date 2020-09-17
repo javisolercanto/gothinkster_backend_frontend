@@ -46,10 +46,6 @@ router.get('/', auth.optional, function(req, res, next) {
     offset = req.query.offset;
   }
 
-  if( typeof req.query.tag !== 'undefined' ){
-    query.tagList = {"$in" : [req.query.tag]};
-  }
-
   Promise.all([
     req.query.author ? User.findOne({username: req.query.author}) : null,
     req.query.favorited ? User.findOne({username: req.query.favorited}) : null
@@ -111,16 +107,16 @@ router.put('/:movie', auth.required, function(req, res, next) {
         req.movie.title = req.body.movie.title;
       }
 
-      if(typeof req.body.movie.description !== 'undefined'){
-        req.movie.description = req.body.movie.description;
+      if(typeof req.body.movie.director !== 'undefined'){
+        req.movie.director = req.body.movie.director;
       }
 
-      if(typeof req.body.movie.body !== 'undefined'){
-        req.movie.body = req.body.movie.body;
+      if(typeof req.body.movie.releaseYear !== 'undefined'){
+        req.movie.releaseYear = req.body.movie.releaseYear;
       }
 
-      if(typeof req.body.movie.tagList !== 'undefined'){
-        req.movie.tagList = req.body.movie.tagList
+      if(typeof req.body.movie.duration !== 'undefined'){
+        req.movie.duration = req.body.movie.duration;
       }
 
       req.movie.save().then(function(movie){
@@ -136,8 +132,6 @@ router.put('/:movie', auth.required, function(req, res, next) {
 router.delete('/:movie', auth.required, function(req, res, next) {
   User.findById(req.payload.id).then(function(user){
     if (!user) { return res.sendStatus(401); }
-
-    console.log("************" + req.movie.author._id);
 
     if(req.movie.author._id.toString() === req.payload.id.toString()){
       return req.movie.remove().then(function(){
