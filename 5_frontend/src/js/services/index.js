@@ -16,6 +16,9 @@ servicesModule.service('Profile', ProfileService);
 import ArticlesService from './articles.service';
 servicesModule.service('Articles', ArticlesService);
 
+import MovieService from './movies.service';
+servicesModule.service('Movies', MovieService);
+
 import CommentsService from './comments.service';
 servicesModule.service('Comments', CommentsService);
 
