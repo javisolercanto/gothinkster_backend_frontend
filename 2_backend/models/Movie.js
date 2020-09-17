@@ -8,7 +8,7 @@ var MovieSchema = new mongoose.Schema({
   title: String,
   director: String,
   duration: Number,
-  realeaseYear: Number,
+  releaseYear: Number,
   favoritesCount: {type: Number, default: 0},
   author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 }, {timestamps: true});
@@ -38,12 +38,13 @@ MovieSchema.methods.updateFavoriteCount = function() {
 };
 
 MovieSchema.methods.toJSONFor = function(user){
+  
   return {
     slug: this.slug,
     title: this.title,
     director: this.director,
     duration: this.duration,
-    realeaseYear: this.realeaseYear,
+    releaseYear: this.releaseYear,
     author: this.author.toProfileJSONFor(user),
     favorited: user ? user.isFavorite(this._id) : false,
     favoritesCount: this.favoritesCount,
