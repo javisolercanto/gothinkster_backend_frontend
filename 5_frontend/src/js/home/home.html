@@ -15,7 +15,7 @@
       <!-- Main view - contains tabs & article list -->
       <div class="col-md-9">
         <!-- Tabs for toggling between feed, article lists -->
-        <div class="feed-toggle">
+      <!--   <div class="feed-toggle">
           <ul class="nav nav-pills outline-active">
 
             <li class="nav-item" show-authed="true">
@@ -40,16 +40,31 @@
               </a>
             </li>
 
-          </ul>
+          </ul> -->
         </div>
 
         <!-- List the current articles -->
-        <article-list limit="10" list-config="$ctrl.listConfig"></article-list>
+        <!-- <article-list limit="10" list-config="$ctrl.listConfig"></article-list> -->
+        
+        <!-- Filtered by number of seasons > 3 (COMPONENT) -->
+        <div class="container">
+          <series-list series="series"></series-list>
+        </div>
+
+        <!-- Filtered by releaseYear > 1996 (NO-COMPONENT) -->
+        <div class="container" ng-repeat="movie in movies">
+          <div class="article-meta">
+              <h2>{{ movie.title }}</h2>
+              <p>Director: {{ movie.director }}</p>
+              <p>Release Year: {{ movie.releaseYear }}</p>
+              <p>Duration: {{ movie.duration }}</p>
+          </div>
+      </div>
 
       </div>
 
       <!-- Sidebar where popular tags are listed -->
-      <div class="col-md-3">
+      <!-- <div class="col-md-3">
         <div class="sidebar">
 
           <p>Popular Tags</p>
@@ -72,7 +87,7 @@
           </div>
 
         </div>
-      </div>
+      </div> -->
 
       <!-- End the row & container divs -->
     </div>

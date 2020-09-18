@@ -3,5 +3,8 @@
         <img ng-src="{{$ctrl.serie.image}}"/>
         <h2 style="margin-top: 20px;" ng-bind="$ctrl.serie.title"></h2>
         <p ng-bind="'Seasons: ' + $ctrl.serie.seasons"></p>
+        <p style="opacity: 0.7;" ng-bind="'Posted by: ' + $ctrl.serie.author.username"></p>
+        <button style="border-width: 0px; background-color: #5db95b; color: white; margin-bottom: 15px;" 
+            ng-click="onBack()">Back</button>
     </div>
 </div>
