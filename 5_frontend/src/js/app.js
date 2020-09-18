@@ -13,6 +13,7 @@ import './components';
 import './home';
 import './profile';
 import './article';
+import './serie';
 import './movie';
 import './services';
 import './auth';
@@ -33,7 +34,9 @@ const requires = [
   'app.auth',
   'app.settings',
   'app.editor',
-  'app.movie'
+  'app.movie',
+  'app.serie',
+  'app.detailsSerie',
 ];
 
 // Mount on window for testing

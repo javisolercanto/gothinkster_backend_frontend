@@ -16,8 +16,11 @@ servicesModule.service('Profile', ProfileService);
 import ArticlesService from './articles.service';
 servicesModule.service('Articles', ArticlesService);
 
-import MovieService from './movies.service';
-servicesModule.service('Movies', MovieService);
+import MoviesService from './movies.service';
+servicesModule.service('Movies', MoviesService);
+
+import SeriesService from './series.service';
+servicesModule.service('Series', SeriesService);
 
 import CommentsService from './comments.service';
 servicesModule.service('Comments', CommentsService);

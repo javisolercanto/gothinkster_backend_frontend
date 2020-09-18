@@ -1,11 +1,11 @@
-export default class Movies {
+export default class Categories {
     constructor(AppConstants, $http, $q) {
       'ngInject';
   
       this._AppConstants = AppConstants;
       this._$http = $http;
       this._$q = $q;
-
+      
     }
   
     /*
@@ -19,35 +19,35 @@ export default class Movies {
     /* query(config) {
       // Create the $http object for this request
       let request = {
-        url: this._AppConstants.api + '/movies' + ((config.type === 'feed') ? '/feed' : ''),
+        url: this._AppConstants.api + '/categories' + ((config.type === 'feed') ? '/feed' : ''),
         method: 'GET',
         params: config.filters ? config.filters : null
       };
       return this._$http(request).then((res) => res.data);
     } */
 
-    getMovies() {
+    getCategories() {
       return this._$http({
-        url: this._AppConstants.api + "/movies",
+        url: this._AppConstants.api + "/categories",
         method: "GET",
       }).then(res => {
-        return res.data.movies;
+        return res.data.categories;
       })
     }
   
-    getMovie(slug) {
+    getCategory(slug) {
       let deferred = this._$q.defer();
   
       if (!slug.replace(" ", "")) {
-        deferred.reject("Movie slug is empty");
+        deferred.reject("Category slug is empty");
         return deferred.promise;
       }
   
       this._$http({
-        url: this._AppConstants.api + '/movies/' + slug,
+        url: this._AppConstants.api + '/categories/' + slug,
         method: 'GET'
       }).then(
-        (res) => deferred.resolve(res.data.movie),
+        (res) => deferred.resolve(res.data.category),
         (err) => deferred.reject(err)
       );
   
@@ -56,40 +56,40 @@ export default class Movies {
   
     destroy(slug) {
       return this._$http({
-        url: this._AppConstants.api + '/movies/' + slug,
+        url: this._AppConstants.api + '/categories/' + slug,
         method: 'DELETE'
       })
     }
   
-    save(movie) {
+    save(category) {
       let request = {};
   
-      if (movie.slug) {
-        request.url = `${this._AppConstants.api}/movies/${movie.slug}`;
+      if (category.slug) {
+        request.url = `${this._AppConstants.api}/categories/${category.slug}`;
         request.method = 'PUT';
-        delete movie.slug;
+        delete category.slug;
   
       } else {
-        request.url = `${this._AppConstants.api}/movies`;
+        request.url = `${this._AppConstants.api}/categories`;
         request.method = 'POST';
       }
   
-      request.data = { movie: movie };
+      request.data = { category: category };
   
-      return this._$http(request).then((res) => res.data.movie);
+      return this._$http(request).then((res) => res.data.category);
     }
   
   
     favorite(slug) {
       return this._$http({
-        url: this._AppConstants.api + '/movies/' + slug + '/favorite',
+        url: this._AppConstants.api + '/categories/' + slug + '/favorite',
         method: 'POST'
       })
     }
   
     unfavorite(slug) {
       return this._$http({
-        url: this._AppConstants.api + '/movies/' + slug + '/favorite',
+        url: this._AppConstants.api + '/categories/' + slug + '/favorite',
         method: 'DELETE'
       })
     }

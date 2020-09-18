@@ -24,6 +24,12 @@ componentsModule.component('articlePreview', ArticlePreview);
 import ArticleList from './article-helpers/article-list.component';
 componentsModule.component('articleList', ArticleList);
 
+import SeriesList from './series-helpers/series-list.component';
+componentsModule.component('seriesList', SeriesList);
+
+import SeriesDetails from './series-helpers/series-details.component';
+componentsModule.component('seriesDetails', SeriesDetails);
+
 import ListPagination from './article-helpers/list-pagination.component';
 componentsModule.component('listPagination', ListPagination);
 
