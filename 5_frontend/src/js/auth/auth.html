@@ -5,12 +5,10 @@
       <div class="col-md-6 offset-md-3 col-xs-12">
         <h1 class="text-xs-center" ng-bind="::$ctrl.title"></h1>
         <p class="text-xs-center">
-          <a ui-sref="app.login"
-            ng-show="$ctrl.authType === 'register'">
+          <a ui-sref="app.login" ng-show="$ctrl.authType === 'register'">
             Have an account?
           </a>
-          <a ui-sref="app.register"
-            ng-show="$ctrl.authType === 'login'">
+          <a ui-sref="app.register" ng-show="$ctrl.authType === 'login'">
             Need an account?
           </a>
         </p>
@@ -21,29 +19,26 @@
           <fieldset ng-disabled="$ctrl.isSubmitting">
 
             <fieldset class="form-group" ng-show="$ctrl.authType === 'register'">
-              <input class="form-control form-control-lg"
-                type="text"
-                placeholder="Username"
+              <input class="form-control form-control-lg" type="text" placeholder="Username"
                 ng-model="$ctrl.formData.username" />
             </fieldset>
 
             <fieldset class="form-group">
-              <input class="form-control form-control-lg"
-                type="email"
-                placeholder="Email"
+              <input class="form-control form-control-lg" type="email" placeholder="Email"
                 ng-model="$ctrl.formData.email" />
             </fieldset>
 
             <fieldset class="form-group">
-              <input class="form-control form-control-lg"
-                type="password"
-                placeholder="Password"
+              <input class="form-control form-control-lg" type="password" placeholder="Password"
                 ng-model="$ctrl.formData.password" />
             </fieldset>
 
-            <button class="btn btn-lg btn-primary pull-xs-right"
-              type="submit"
-              ng-bind="::$ctrl.title">
+            <a class="ion-social-github" style="font-size:50px ;margin: 30px;"
+              href="http://localhost:3000/api/auth/github"></a>
+            <a class="ion-social-google" style="font-size:50px ;margin: 30px;"
+              href="http://localhost:3000/api/auth/github"></a>
+
+            <button class="btn btn-lg btn-primary pull-xs-right" type="submit" ng-bind="::$ctrl.title">
             </button>
 
           </fieldset>

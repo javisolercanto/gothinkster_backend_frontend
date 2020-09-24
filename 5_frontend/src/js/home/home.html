@@ -1,4 +1,4 @@
- <div class="home-page">
+<div class="home-page">
 
   <!-- Splash banner that only shows when not logged in -->
   <div class="banner" show-authed="false">
@@ -15,7 +15,7 @@
       <!-- Main view - contains tabs & article list -->
       <div class="col-md-9">
         <!-- Tabs for toggling between feed, article lists -->
-      <!--   <div class="feed-toggle">
+        <!--   <div class="feed-toggle">
           <ul class="nav nav-pills outline-active">
 
             <li class="nav-item" show-authed="true">
@@ -41,30 +41,33 @@
             </li>
 
           </ul> -->
-        </div>
+        <series-list series="series"></series-list>
+      </div>
 
-        <!-- List the current articles -->
-        <!-- <article-list limit="10" list-config="$ctrl.listConfig"></article-list> -->
-        
-        <!-- Filtered by number of seasons > 3 (COMPONENT) -->
-        <div class="container">
-          <series-list series="series"></series-list>
-        </div>
+      <hr style="width:50%;text-align:left;margin-left:0">
 
-        <!-- Filtered by releaseYear > 1996 (NO-COMPONENT) -->
+      <div class="col-md-9">
         <div class="container" ng-repeat="movie in movies">
           <div class="article-meta">
-              <h2>{{ movie.title }}</h2>
-              <p>Director: {{ movie.director }}</p>
-              <p>Release Year: {{ movie.releaseYear }}</p>
-              <p>Duration: {{ movie.duration }}</p>
+            <h2>{{ movie.title }}</h2>
+            <p>Director: {{ movie.director }}</p>
+            <p>Release Year: {{ movie.releaseYear }}</p>
+            <p>Duration: {{ movie.duration }}</p>
           </div>
+        </div>
       </div>
 
-      </div>
+      <!-- List the current articles -->
+      <!-- <article-list limit="10" list-config="$ctrl.listConfig"></article-list> -->
 
-      <!-- Sidebar where popular tags are listed -->
-      <!-- <div class="col-md-3">
+      <!-- Filtered by number of seasons > 3 (COMPONENT) -->
+
+      <!-- Filtered by releaseYear > 1996 (NO-COMPONENT) -->
+
+    </div>
+
+    <!-- Sidebar where popular tags are listed -->
+    <!-- <div class="col-md-3">
         <div class="sidebar">
 
           <p>Popular Tags</p>
@@ -89,8 +92,8 @@
         </div>
       </div> -->
 
-      <!-- End the row & container divs -->
-    </div>
+    <!-- End the row & container divs -->
   </div>
+</div>
 
 </div>

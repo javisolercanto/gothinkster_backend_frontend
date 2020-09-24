@@ -12,9 +12,11 @@ export default class User {
 
   }
 
-
   attemptAuth(type, credentials) {
+    console.log(credentials);
     let route = (type === 'login') ? '/login' : '';
+    route = (type === 'socialLogin') ? '/sociallogin' : '';
+
     return this._$http({
       url: this._AppConstants.api + '/users' + route,
       method: 'POST',

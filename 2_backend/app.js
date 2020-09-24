@@ -46,9 +46,13 @@ if(isProduction){
 require('./models/User');
 require('./models/Movie');
 require('./models/Serie');
+require('./models/Category');
 require('./models/Article');
 require('./models/Comment');
 require('./config/passport');
+
+app.use(passport.initialize());
+app.use(passport.session())
 
 app.use(require('./routes'));
 

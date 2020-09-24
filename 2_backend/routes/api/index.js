@@ -5,6 +5,7 @@ router.use('/profiles', require('./profiles'));
 router.use('/movies', require('./movies'));
 router.use('/series', require('./series'));
 router.use('/articles', require('./articles'));
+router.use('/categories', require('./categories'));
 router.use('/tags', require('./tags'));
 
 router.use(function(err, req, res, next){

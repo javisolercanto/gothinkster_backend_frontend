@@ -9,6 +9,7 @@ var SerieSchema = new mongoose.Schema({
   seasons: Number,
   image: String,
   favoritesCount: {type: Number, default: 0},
+  /* category: {type: mongoose.Schema.Types.ObjectId, ref: "Category"}, */
   author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 }, {timestamps: true});
 
@@ -36,13 +37,14 @@ SerieSchema.methods.updateFavoriteCount = function() {
   });
 };
 
-SerieSchema.methods.toJSONFor = function(user){
+SerieSchema.methods.toJSONFor = function(user, category){
   
   return {
     slug: this.slug,
     title: this.title,
     seasons: this.seasons,
     image: this.image,
+    /* category: this.category.toProfileJSONFor(category), */
     author: this.author.toProfileJSONFor(user),
     favorited: user ? user.isFavorite(this._id) : false,
     favoritesCount: this.favoritesCount,

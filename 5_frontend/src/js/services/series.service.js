@@ -53,7 +53,7 @@ export default class Series {
 
       return deferred.promise;
     }
-  
+
     destroy(slug) {
       return this._$http({
         url: this._AppConstants.api + '/series/' + slug,

@@ -37,6 +37,7 @@ const requires = [
   'app.movie',
   'app.serie',
   'app.detailsSerie',
+  'app.socialLogin'
 ];
 
 // Mount on window for testing
