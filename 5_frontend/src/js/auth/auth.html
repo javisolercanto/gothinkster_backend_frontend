@@ -13,34 +13,69 @@
           </a>
         </p>
 
-        <list-errors errors="$ctrl.errors"></list-errors>
+        <!--  <list-errors errors="$ctrl.errors"></list-errors> -->
 
-        <form ng-submit="$ctrl.submitForm()">
+        <form name="authForm" ng-submit="$ctrl.submitForm(true)">
           <fieldset ng-disabled="$ctrl.isSubmitting">
 
             <fieldset class="form-group" ng-show="$ctrl.authType === 'register'">
-              <input class="form-control form-control-lg" type="text" placeholder="Username"
-                ng-model="$ctrl.formData.username" />
+              <input required name="Username" class="form-control form-control-lg" type="text" placeholder="Username"
+                ng-model="$ctrl.formData.username" ng-minlength="4" ng-maxlength="20" />
             </fieldset>
 
             <fieldset class="form-group">
-              <input class="form-control form-control-lg" type="email" placeholder="Email"
+              <input required name="Email" class="form-control form-control-lg" type="email" placeholder="Email"
                 ng-model="$ctrl.formData.email" />
             </fieldset>
 
             <fieldset class="form-group">
-              <input class="form-control form-control-lg" type="password" placeholder="Password"
-                ng-model="$ctrl.formData.password" />
+              <input required name="Password" class="form-control form-control-lg" type="password"
+                placeholder="Password" ng-model="$ctrl.formData.password" ng-minlength="6" ng-maxlength="20" />
             </fieldset>
 
-            <a class="ion-social-github" style="font-size:50px ;margin: 30px;"
-              href="http://localhost:3000/api/auth/github"></a>
-            <a class="ion-social-google" style="font-size:50px ;margin: 30px;"
-              href="http://localhost:3000/api/auth/github"></a>
+            <div ng-messages="authForm.Username.$error" style="color: red; font-weight: bold" role="alert">
+              <!-- <p ng-message="required" >Username is required</p> -->
+              <p ng-message="minlength">Your username is too short (4-20)</p>
+              <p ng-message="maxlength">Your username is too long (4-20)</p>
+            </div>
 
-            <button class="btn btn-lg btn-primary pull-xs-right" type="submit" ng-bind="::$ctrl.title">
-            </button>
+            <div ng-messages="authForm.Email.$error" style="color: red; font-weight: bold" role="alert">
+              <!-- <p ng-message="required" ng-show="authForm.Email.$dirty">Email is required</p> -->
+            </div>
 
+            <div ng-messages="authForm.Password.$error" style="color: red; font-weight: bold" role="alert">
+              <!-- <p ng-message="required" ng-show="authForm.Password.$dirty">Password is required</p> -->
+              <p ng-message="minlength">Your password is too short (6-20)</p>
+              <p ng-message="maxlength">Your password is too long (6-20)</p>
+            </div>
+
+            <div>
+              <a class="ion-social-github" style="font-size:50px ;margin: 30px;"
+                href="http://localhost:3000/api/auth/github"></a>
+              <a class="ion-social-google" style="font-size:50px ;margin: 30px;"
+                href="http://localhost:3000/api/auth/googleplus"></a>
+
+              <button style="margin-top: 10px;" class="btn btn-lg btn-primary pull-xs-right" type="submit"
+                ng-bind="::$ctrl.title"
+                ng-show="$ctrl.authType==='register' && authForm.Password.$valid && authForm.Email.$valid && authForm.Username.$valid"
+                ng-click="$ctrl.submitForm(true)">
+              </button>
+              <button style="margin-top: 10px;" class="btn btn-lg btn-primary pull-xs-right" type="submit"
+                ng-bind="::$ctrl.title"
+                ng-hide="$ctrl.authType!=='register' || authForm.Password.$valid && authForm.Email.$valid && authForm.Username.$valid"
+                ng-click="$ctrl.submitForm(false)">
+              </button>
+              <button style="margin-top: 10px;" class="btn btn-lg btn-primary pull-xs-right" type="submit"
+                ng-bind="::$ctrl.title"
+                ng-hide="$ctrl.authType==='register' || authForm.Password.$valid && authForm.Email.$valid"
+                ng-click="$ctrl.submitForm(false)">
+              </button>
+              <button style="margin-top: 10px;" class="btn btn-lg btn-primary pull-xs-right" type="submit"
+                ng-bind="::$ctrl.title"
+                ng-show="$ctrl.authType!=='register' && authForm.Password.$valid && authForm.Email.$valid"
+                ng-click="$ctrl.submitForm(true)">
+              </button>
+            </div>
           </fieldset>
         </form>
       </div>

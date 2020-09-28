@@ -33,4 +33,7 @@ componentsModule.component('seriesDetails', SeriesDetails);
 import ListPagination from './article-helpers/list-pagination.component';
 componentsModule.component('listPagination', ListPagination);
 
+import HomeSlider from './home-helpers/home-slider.component';
+componentsModule.component('homeSlider', HomeSlider);
+
 export default componentsModule;
