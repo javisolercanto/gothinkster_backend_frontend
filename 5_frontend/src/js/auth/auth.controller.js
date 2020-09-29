@@ -1,5 +1,3 @@
-import Toastr from "../services/toastr.service";
-
 class AuthCtrl {
   constructor($state, User, Toastr) {
     'ngInject';
@@ -19,10 +17,10 @@ class AuthCtrl {
           this._User.attemptAuth(this.authType, this.formData).then(
             (res) => {
               this._$state.go('app.home');
-              Toastr.showToastr('success', 'Success');
+              Toastr.showToastr('success', 'Successful '.concat(this.authType === 'register' ? "register" : "login"));
             },
             (err) => {
-              Toastr.showToastr('error', "ERROR!");
+              Toastr.showToastr('error', err.data);
 
               this.isSubmitting = false;
               this.errors = err.data.errors;

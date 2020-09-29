@@ -1,5 +1,5 @@
 class SettingsCtrl {
-  constructor(User, $state) {
+  constructor(User, $state, Toastr) {
     'ngInject';
 
     this._User = User;
@@ -14,21 +14,21 @@ class SettingsCtrl {
 
     this.logout = User.logout.bind(User);
 
+    this.submitForm = () => {
+      this.isSubmitting = true;
+      this._User.update(this.formData).then(
+        (user) => {
+          this._$state.go('app.profile.main', {username:user.username});
+          Toastr.showToastr('success', 'Account updated!');
+        },
+        (err) => {
+          this.isSubmitting = false;
+          this.errors = err.data.errors;
+          Toastr.showToastr('error', err.data);
+        }
+      )
+    }
   }
-
-  submitForm() {
-    this.isSubmitting = true;
-    this._User.update(this.formData).then(
-      (user) => {
-        this._$state.go('app.profile.main', {username:user.username})
-      },
-      (err) => {
-        this.isSubmitting = false;
-        this.errors = err.data.errors;
-      }
-    )
-  }
-
 }
 
 export default SettingsCtrl;
