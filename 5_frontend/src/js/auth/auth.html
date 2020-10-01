@@ -21,7 +21,7 @@
             <!-- Username input -->
             <fieldset class="form-group" ng-show="$ctrl.authType === 'register'">
               <input required name="Username" class="form-control form-control-lg" type="text" placeholder="Username"
-                ng-model="$ctrl.formData.username" ng-minlength="4" ng-maxlength="20" />
+                ng-model="$ctrl.formData.username" ng-disabled="authType ==! 'register'" ng-minlength="4" ng-maxlength="20" />
             </fieldset>
 
             <!-- Email input -->

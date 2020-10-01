@@ -45,6 +45,11 @@ gulp.task('html', function() {
       .on('error', interceptErrors)
       .pipe(gulp.dest('./build/'));
 });
+/* 
+gulp.task('img', function() {
+  return gulp.src("src/img/*.*")
+      .pipe(gulp.dest('./build/img'));
+}); */
 
 gulp.task('views', function() {
   return gulp.src(viewFiles)

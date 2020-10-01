@@ -1,11 +1,10 @@
-<div style="height: 400px;">
+<div style="height: 200px;">
     <div uib-carousel active="active" interval="$ctrl.interval" no-wrap="$ctrl.noWrapSlides">
-        <div uib-slide ng-repeat="slide in $ctrl.slides track by slide.id" index="slide.id", style="height: 400px;">
-            <img ng-src="{{ slide.image }}" class="img-fluid" alt="Slide image" style="filter: blur(2px);"/>
-            <div class="carrousel-caption" style="padding-bottom: 100px;">
-                <!-- <img src="" alt=""/> -->
+        <div uib-slide ng-repeat="slide in $ctrl.slides track by slide.id" index="slide.id" style="height: 200px;">
+            <img ng-src="{{slide.image}}" class="img-fluid"/>
+            <div class="carousel-caption" style="padding-bottom: 100px;">
                 <h2>{{ slide.text }}</h2>
             </div>
         </div>
     </div>
-</div>
+</div> 
