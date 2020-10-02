@@ -8,6 +8,7 @@ var SerieSchema = new mongoose.Schema({
   title: String,
   seasons: Number,
   image: String,
+  category: String,
   favoritesCount: {type: Number, default: 0},
   /* category: {type: mongoose.Schema.Types.ObjectId, ref: "Category"}, */
   author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
@@ -44,6 +45,7 @@ SerieSchema.methods.toJSONFor = function(user, category){
     title: this.title,
     seasons: this.seasons,
     image: this.image,
+    category: this.category,
     /* category: this.category.toProfileJSONFor(category), */
     author: this.author.toProfileJSONFor(user),
     favorited: user ? user.isFavorite(this._id) : false,

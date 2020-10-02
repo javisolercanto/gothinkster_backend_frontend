@@ -23,18 +23,13 @@ router.post('/', auth.required, function (req, res, next) {
   User.findById(req.payload.id).then(function (user) {
     if (!user) { return res.sendStatus(401); }
 
-    Category.findById("").then(function (category) {
-      if (!category) { return res.sendStatus(401); }
+    var serie = new Serie(req.body.serie);
+    serie.author = user;
 
-      var serie = new Serie(req.body.serie);
+    return serie.save().then(function(){
+      return res.json({serie: serie.toJSONFor(user)});
+    });
 
-      serie.author = user;
-      serie.category = category;
-
-      return serie.save().then(function () {
-        return res.json({ serie: serie.toJSONFor(user, category) });
-      });
-    })
   }).catch(next);
 });
 
@@ -93,6 +88,13 @@ router.get('/', auth.optional, function (req, res, next) {
   }).catch(next);
 });
 
+// Return all distinct categories
+router.get('/categories', auth.optional, function(req, res, next) {
+  Serie.find().distinct('category').then(function(categories) {
+    return res.json({categories: categories});
+  });
+});
+
 // return a serie
 router.get('/:serie', auth.optional, function (req, res, next) {
   Promise.all([
@@ -119,6 +121,10 @@ router.put('/:serie', auth.required, function (req, res, next) {
 
       if (typeof req.body.serie.image !== 'undefined') {
         req.serie.image = req.body.serie.image;
+      }
+
+      if (typeof req.body.serie.category !== 'undefined') {
+        req.serie.category = req.body.serie.category;
       }
 
       req.serie.save().then(function (serie) {
