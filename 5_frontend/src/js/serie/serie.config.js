@@ -3,7 +3,7 @@ function SerieConfig($stateProvider) {
 
   $stateProvider
     .state('app.serie', {
-      url: '/series/',
+      url: '/series/:filter',
       controller: 'SerieCtrl',
       controllerAs: '$ctrl',
       templateUrl: 'serie/series.html',
@@ -14,11 +14,11 @@ function SerieConfig($stateProvider) {
             (series) => series,
             (err) => $state.go('app.home')
           )
-        }
+        },
       }
     })
     .state("app.detailsSerie", {
-      url: "/series/:slug",
+      url: "/series/details/:slug",
       controller: "DetailsSerieCtrl",
       controllerAs: "$ctrl",
       templateUrl: "serie/serieDetails.html",

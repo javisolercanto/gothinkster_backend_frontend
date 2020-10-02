@@ -21,6 +21,11 @@ function HomeConfig($stateProvider) {
           (err) => $state.go('app.home')
         )
       },
+      categories: function (Series, $state) {
+        return Series.getCategories().then(
+          (categories) => categories,
+        )
+      }
     }
   });
 

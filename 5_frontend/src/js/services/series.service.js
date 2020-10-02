@@ -7,24 +7,6 @@ export default class Series {
       this._$q = $q;
       
     }
-  
-    /*
-      Config object spec:
-  
-      {
-        type: String [REQUIRED] - Accepts "all", "feed"
-        filters: Object that serves as a key => value of URL params (i.e. {author:"ericsimons"} )
-      }
-    */
-    /* query(config) {
-      // Create the $http object for this request
-      let request = {
-        url: this._AppConstants.api + '/series' + ((config.type === 'feed') ? '/feed' : ''),
-        method: 'GET',
-        params: config.filters ? config.filters : null
-      };
-      return this._$http(request).then((res) => res.data);
-    } */
 
     getSeries() {
       return this._$http({
@@ -48,6 +30,20 @@ export default class Series {
         method: 'GET'
       }).then(
         (res) => deferred.resolve(res.data.serie),
+        (err) => deferred.reject(err)
+      );
+
+      return deferred.promise;
+    }
+
+    getCategories() {
+      let deferred = this._$q.defer();
+  
+      this._$http({
+        url: this._AppConstants.api + '/series/categories/',
+        method: 'GET'
+      }).then(
+        (res) => deferred.resolve(res.data.categories),
         (err) => deferred.reject(err)
       );
 
@@ -93,7 +89,5 @@ export default class Series {
         method: 'DELETE'
       })
     }
-  
-  
   }
   

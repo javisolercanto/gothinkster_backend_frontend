@@ -5,7 +5,7 @@ class SeriesDetailsCtrl {
 
         this._$scope = $scope;
         this._$scope.onBack = () => {
-            $state.go('app.serie');   
+            $state.go('app.serie');
         }
     }
 }

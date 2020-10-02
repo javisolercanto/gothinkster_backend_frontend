@@ -8,11 +8,10 @@
     </div>
   </div>
 
-  <home-slider></home-slider>
+  <!-- <home-slider></home-slider> -->
 
   <div class="container page">
     <div class="row">
-
 
       <!-- Main view - contains tabs & article list -->
       <div class="col-md-9">
@@ -43,10 +42,16 @@
             </li>
 
           </ul> -->
-        <series-list series="series"></series-list>
+        <!-- <series-list series="series"></series-list> -->
       </div>
 
-      <hr style="width:50%;text-align:left;margin-left:0">
+      <div class="container">
+        <div ng-repeat="category in categories">
+          <button ui-sref="app.serie({filter: category})" style="border-width: 0px; background-color: #5db95b; color: white; margin-bottom: 15px;">{{category}}</button>
+        </div>
+      </div>
+
+      <!-- <hr style="width:50%;text-align:left;margin-left:0">
 
       <div class="col-md-9">
         <div class="container" ng-repeat="movie in movies">
@@ -57,7 +62,7 @@
             <p>Duration: {{ movie.duration }}</p>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- List the current articles -->
       <!-- <article-list limit="10" list-config="$ctrl.listConfig"></article-list> -->

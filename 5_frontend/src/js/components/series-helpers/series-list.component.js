@@ -5,7 +5,7 @@ class SeriesListCtrl {
 
         this._$scope = $scope;
         this._$scope.openDetails = function () {
-            $state.go("app.detailsSerie", { slug: this.serie["slug"] }, $state.current.name);
+            $state.go("app.detailsSerie", { slug: this.serie["slug"] });
           };
     }
 }

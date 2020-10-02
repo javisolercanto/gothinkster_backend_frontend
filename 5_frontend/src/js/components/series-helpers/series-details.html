@@ -1,8 +1,9 @@
 <div class="container">
     <div class="article-meta">
-        <img ng-src="{{$ctrl.serie.image}}"/>
+        <img style="height: 200px; width: 400px;" ng-src="{{$ctrl.serie.image}}"/>
         <h2 style="margin-top: 20px;" ng-bind="$ctrl.serie.title"></h2>
         <p ng-bind="'Seasons: ' + $ctrl.serie.seasons"></p>
+        <p ng-bind="$ctrl.serie.category"></p>
         <p style="opacity: 0.7;" ng-bind="'Posted by: ' + $ctrl.serie.author.username"></p>
         <button style="border-width: 0px; background-color: #5db95b; color: white; margin-bottom: 15px;" 
             ng-click="onBack()">Back</button>
