@@ -2,7 +2,7 @@ var router = require('express').Router();
 var mongoose = require('mongoose');
 var Serie = mongoose.model('Serie');
 var User = mongoose.model('User');
-var Category = mongoose.model('Category');
+var Review = mongoose.model('Review');
 var auth = require('../auth');
 
 // Preload serie objects on routes with ':serie'
@@ -18,6 +18,16 @@ router.param('serie', function (req, res, next, slug) {
     }).catch(next);
 });
 
+router.param('review', function (req, res, next, id) {
+  Review.findById(id).then(function (review) {
+    if (!review) { return res.sendStatus(404); }
+
+    req.review = review;
+
+    return next();
+  }).catch(next);
+});
+
 // Save register
 router.post('/', auth.required, function (req, res, next) {
   User.findById(req.payload.id).then(function (user) {
@@ -26,8 +36,8 @@ router.post('/', auth.required, function (req, res, next) {
     var serie = new Serie(req.body.serie);
     serie.author = user;
 
-    return serie.save().then(function(){
-      return res.json({serie: serie.toJSONFor(user)});
+    return serie.save().then(function () {
+      return res.json({ serie: serie.toJSONFor(user) });
     });
 
   }).catch(next);
@@ -89,9 +99,9 @@ router.get('/', auth.optional, function (req, res, next) {
 });
 
 // Return all distinct categories
-router.get('/categories', auth.optional, function(req, res, next) {
-  Serie.find().distinct('category').then(function(categories) {
-    return res.json({categories: categories});
+router.get('/categories', auth.optional, function (req, res, next) {
+  Serie.find().distinct('category').then(function (categories) {
+    return res.json({ categories: categories });
   });
 });
 
@@ -179,6 +189,63 @@ router.delete('/:serie/favorite', auth.required, function (req, res, next) {
       });
     });
   }).catch(next);
+});
+
+// return an serie's reviews
+router.get('/:serie/reviews', auth.optional, function (req, res, next) {
+  Promise.resolve(req.payload ? User.findById(req.payload.id) : null).then(function (user) {
+    return req.serie.populate({
+      path: 'reviews',
+      populate: {
+        path: 'author'
+      },
+      options: {
+        sort: {
+          createdAt: 'desc'
+        }
+      }
+    }).execPopulate().then(function (serie) {
+      console.log(serie);
+      return res.json({
+        reviews: req.serie.reviews.map(function (review) {
+          return review.toJSONFor(user);
+        })
+      });
+    });
+  }).catch(next);
+});
+
+// create a new review
+router.post('/:serie/reviews', auth.required, function (req, res, next) {
+  User.findById(req.payload.id).then(function (user) {
+    if (!user) { return res.sendStatus(401); }
+
+    var review = new Review(req.body.review);
+    review.serie = req.serie;
+    review.author = user;
+
+    return review.save().then(function () {
+      req.serie.reviews === undefined ? req.serie.reviews = [] : req.serie.reviews = req.serie.reviews.concat(review);
+      /* req.serie.reviews.push(review); */
+
+      return req.serie.save().then(function (serie) {
+        res.json({ review: review.toJSONFor(user) });
+      });
+    });
+  }).catch(next);
+});
+
+router.delete('/:serie/reviews/:review', auth.required, function (req, res, next) {
+  if (req.review.author.toString() === req.payload.id.toString()) {
+    req.serie.reviews.remove(req.review._id);
+    req.serie.save()
+      .then(Review.find({ _id: req.review._id }).remove().exec())
+      .then(function () {
+        res.sendStatus(204);
+      });
+  } else {
+    res.sendStatus(403);
+  }
 });
 
 module.exports = router;

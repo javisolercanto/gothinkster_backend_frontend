@@ -17,8 +17,6 @@ router.get('/user', auth.required, function (req, res, next) {
 // Put user
 router.put('/user', auth.required, function (req, res, next) {
   let emailChanged, usernameChanged = false;
-  console.log("MODIFICACIÓN");
-  console.log("ESKKKOOIBALET");
   User.findById(req.payload.id).then(function (user) {
     if (!user) { return res.sendStatus(401).json("Unauthorized"); }
 

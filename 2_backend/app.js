@@ -49,6 +49,7 @@ require('./models/Serie');
 require('./models/Category');
 require('./models/Article');
 require('./models/Comment');
+require('./models/Review');
 require('./config/passport');
 
 app.use(passport.initialize());

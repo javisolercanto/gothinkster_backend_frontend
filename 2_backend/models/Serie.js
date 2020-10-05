@@ -9,8 +9,8 @@ var SerieSchema = new mongoose.Schema({
   seasons: Number,
   image: String,
   category: String,
+  reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
   favoritesCount: {type: Number, default: 0},
-  /* category: {type: mongoose.Schema.Types.ObjectId, ref: "Category"}, */
   author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 }, {timestamps: true});
 
