@@ -1,0 +1,14 @@
+<div class="article-preview">
+  <serie-meta serie="$ctrl.serie">
+    <favorite-btn
+      serie="$ctrl.serie"
+      class="pull-xs-right">
+      {{$ctrl.serie.favoritesCount}}
+    </favorite-btn>
+  </serie-meta>
+
+  <a ui-sref="app.serie({ slug: $ctrl.serie.slug })" class="preview-link">
+    <h1 ng-bind="$ctrl.serie.title"></h1>
+    <p>{{ $ctrl.serie.category }}</p>
+  </a>
+</div>

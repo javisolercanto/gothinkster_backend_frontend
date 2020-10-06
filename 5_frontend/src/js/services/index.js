@@ -25,6 +25,9 @@ servicesModule.service('Series', SeriesService);
 import CommentsService from './comments.service';
 servicesModule.service('Comments', CommentsService);
 
+import ReviewsService from './reviews.service';
+servicesModule.service('Reviews', ReviewsService);
+
 import TagsService from './tags.service';
 servicesModule.service('Tags', TagsService);
 

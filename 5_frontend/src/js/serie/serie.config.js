@@ -2,9 +2,9 @@ function SerieConfig($stateProvider) {
   'ngInject';
 
   $stateProvider
-    .state('app.serie', {
+    .state('app.series', {
       url: '/series/:filter',
-      controller: 'SerieCtrl',
+      controller: 'SeriesCtrl',
       controllerAs: '$ctrl',
       templateUrl: 'serie/series.html',
       title: 'Serie',
@@ -17,16 +17,19 @@ function SerieConfig($stateProvider) {
         },
       }
     })
-    .state("app.detailsSerie", {
-      url: "/series/details/:slug",
-      controller: "DetailsSerieCtrl",
+    $stateProvider
+    .state("app.serie", {
+      url: "/series/serie/:slug",
+      controller: "SerieCtrl",
       controllerAs: "$ctrl",
-      templateUrl: "serie/serieDetails.html",
-      title: "Details Series",
+      templateUrl: "serie/serie.html",
+      title: "Serie",
       resolve: {
         serie: function (Series, $stateParams) {
-          //este nombre es el que recibe el controlador
-          return Series.getSerie($stateParams.slug).then(serie => serie); //recibo 1 serie
+          return Series.getSerie($stateParams.slug).then(serie => serie);
+        },
+        reviews: function (Reviews, $stateParams) {
+          return Reviews.getAll($stateParams.slug).then(reviews => reviews);
         }
       }
     })

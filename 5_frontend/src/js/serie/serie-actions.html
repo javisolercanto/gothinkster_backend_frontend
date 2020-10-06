@@ -1,0 +1,23 @@
+<serie-meta serie="$ctrl.serie">
+
+  <span ng-show="$ctrl.canModify">
+    <a class="btn btn-sm btn-outline-secondary"
+      ui-sref="app.editor({ slug: $ctrl.serie.slug })">
+      <i class="ion-edit"></i> Edit Serie
+    </a>
+
+    <button class="btn btn-sm btn-outline-danger"
+      ng-class="{disabled: $ctrl.isDeleting}"
+      ng-click="$ctrl.deleteSerie()">
+      <i class="ion-trash-a"></i> Delete Serie
+    </button>
+  </span>
+
+  <span ng-hide="$ctrl.canModify">
+    <follow-btn user="$ctrl.serie.author"></follow-btn>
+    <favorite-btn serie="$ctrl.serie">
+      {{ $ctrl.serie.favorited ? 'Unfavorite' : 'Favorite' }} Serie <span class="counter">({{$ctrl.serie.favoritesCount}})</span>
+    </favorite-btn>
+  </span>
+
+</serie-meta>

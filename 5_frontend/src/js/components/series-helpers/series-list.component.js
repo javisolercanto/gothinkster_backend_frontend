@@ -4,9 +4,9 @@ class SeriesListCtrl {
         "ngInject";
 
         this._$scope = $scope;
-        this._$scope.openDetails = function () {
+        /* this._$scope.openDetails = function () {
             $state.go("app.detailsSerie", { slug: this.serie["slug"] });
-          };
+          }; */
     }
 }
 

@@ -4,7 +4,7 @@ class SeriesDetailsCtrl {
         "ngInject";
 
         this._$scope = $scope;
-        this._$scope.onBack = () => {
+        this.onBack = () => {
             $state.go('app.serie');
         }
     }

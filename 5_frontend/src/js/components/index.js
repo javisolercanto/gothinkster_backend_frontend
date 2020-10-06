@@ -27,6 +27,12 @@ componentsModule.component('articleList', ArticleList);
 import SeriesList from './series-helpers/series-list.component';
 componentsModule.component('seriesList', SeriesList);
 
+import SeriePreview from './series-helpers/serie-preview.component';
+componentsModule.component('seriePreview', SeriePreview);
+
+import SerieMeta from './series-helpers/serie-meta.component';
+componentsModule.component('serieMeta', SerieMeta);
+
 import SeriesDetails from './series-helpers/series-details.component';
 componentsModule.component('seriesDetails', SeriesDetails);
 

@@ -41,7 +41,6 @@ const requires = [
   'app.editor',
   'app.movie',
   'app.serie',
-  'app.detailsSerie',
   'app.socialLogin',
   'ngMessages',
   toastr

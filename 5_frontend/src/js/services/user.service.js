@@ -22,6 +22,7 @@ export default class User {
       }
     }).then(
       (res) => {
+        console.log(res);
         this._JWT.save(res.data.user.token);
         this.current = res.data.user;
 

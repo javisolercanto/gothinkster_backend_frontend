@@ -7,7 +7,6 @@ let articleModule = angular.module('app.article', []);
 import ArticleConfig from './article.config';
 articleModule.config(ArticleConfig);
 
-
 // Controllers
 import ArticleCtrl from './article.controller';
 articleModule.controller('ArticleCtrl', ArticleCtrl);
