@@ -24,6 +24,11 @@
     <p ng-bind="'Seasons: ' + $ctrl.serie.seasons"></p>
     <p ng-bind="$ctrl.serie.category"></p>
 
+    <a class="btn btn-sm btn-outline-primary"
+      ui-sref="app.series({ filter: $ctrl.serie.category })">
+      <i class="ion-button"></i> Show more like this
+    </a>
+
     <hr/>
 
     <!-- Reviews section -->

@@ -1,5 +1,5 @@
 class SerieCtrl {
-  constructor(serie, reviews, current, User, Reviews, $scope, $rootScope) {
+  constructor(serie, reviews, current, User, Reviews, $rootScope) {
     'ngInject';
 
     this._Reviews = Reviews;
@@ -8,14 +8,9 @@ class SerieCtrl {
 
     this.currentUser = current;
 
-    console.log(this.currentUser);
-
-    /* setTimeout(() => {
-      if (User.current) {
-        this.canModify = (User.current.username === this.data.author.username);
-      } else this.canModify = false
-      $scope.$apply();
-    }, 1000); */
+    setTimeout(() => {
+      this.currentUser = User.current;
+    }, 1000);
 
     $rootScope.setPageTitle(this.serie.title);
 
@@ -30,7 +25,7 @@ class SerieCtrl {
     }
   }
 
-  addReview(){
+  addReview() {
     this.reviewForm.isSubmitting = true;
 
     this._Reviews.add(this.serie.slug, this.reviewForm.body).then(

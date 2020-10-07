@@ -1,16 +1,16 @@
 class SerieActionsCtrl {
-  constructor( Series, User, $state) {
+  constructor(Series, User, $scope, $state) {
     'ngInject';
 
     this._Series = Series;
     this._$state = $state;
 
-    /* setTimeout(() => {
+    setTimeout(() => {
       if (User.current) {
-        this.canModify = (User.current.username === this.data.author.username);
+        this.canModify = (User.current.username === this.serie.author.username);
       } else this.canModify = false
       $scope.$apply();
-    }, 1000); */
+    }, 1000);
 
   }
 
