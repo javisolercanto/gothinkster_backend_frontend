@@ -28,13 +28,15 @@ router.param('review', function (req, res, next, id) {
   }).catch(next);
 });
 
-// Save register
+// Save a serie
 router.post('/', auth.required, function (req, res, next) {
   User.findById(req.payload.id).then(function (user) {
     if (!user) { return res.sendStatus(401); }
 
     var serie = new Serie(req.body.serie);
     serie.author = user;
+
+    serie.image === '' && (serie.image = "https://oij.org/wp-content/uploads/2016/05/placeholder.png");
 
     return serie.save().then(function () {
       return res.json({ serie: serie.toJSONFor(user) });
@@ -105,7 +107,7 @@ router.get('/categories', auth.optional, function (req, res, next) {
   });
 });
 
-// return a serie
+// Get a serie
 router.get('/:serie', auth.optional, function (req, res, next) {
   Promise.all([
     req.payload ? User.findById(req.payload.id) : null,
@@ -117,7 +119,7 @@ router.get('/:serie', auth.optional, function (req, res, next) {
   }).catch(next);
 });
 
-// update serie
+// Update a serie
 router.put('/:serie', auth.required, function (req, res, next) {
   User.findById(req.payload.id).then(function (user) {
     if (req.serie.author._id.toString() === req.payload.id.toString()) {
@@ -131,7 +133,9 @@ router.put('/:serie', auth.required, function (req, res, next) {
 
       if (typeof req.body.serie.image !== 'undefined') {
         req.serie.image = req.body.serie.image;
-      }
+      } 
+
+      req.serie.image === '' && (req.serie.image = "https://oij.org/wp-content/uploads/2016/05/placeholder.png");
 
       if (typeof req.body.serie.category !== 'undefined') {
         req.serie.category = req.body.serie.category;
@@ -146,7 +150,7 @@ router.put('/:serie', auth.required, function (req, res, next) {
   });
 });
 
-// delete serie
+// Delete a serie
 router.delete('/:serie', auth.required, function (req, res, next) {
   User.findById(req.payload.id).then(function (user) {
     if (!user) { return res.sendStatus(401); }
@@ -191,7 +195,7 @@ router.delete('/:serie/favorite', auth.required, function (req, res, next) {
   }).catch(next);
 });
 
-// return an serie's reviews
+// Get reviews of a serie
 router.get('/:serie/reviews', auth.optional, function (req, res, next) {
   Promise.resolve(req.payload ? User.findById(req.payload.id) : null).then(function (user) {
     return req.serie.populate({
@@ -205,7 +209,6 @@ router.get('/:serie/reviews', auth.optional, function (req, res, next) {
         }
       }
     }).execPopulate().then(function (serie) {
-      console.log(serie);
       return res.json({
         reviews: req.serie.reviews.map(function (review) {
           return review.toJSONFor(user);
@@ -215,7 +218,7 @@ router.get('/:serie/reviews', auth.optional, function (req, res, next) {
   }).catch(next);
 });
 
-// create a new review
+// Create a review
 router.post('/:serie/reviews', auth.required, function (req, res, next) {
   User.findById(req.payload.id).then(function (user) {
     if (!user) { return res.sendStatus(401); }
@@ -235,6 +238,7 @@ router.post('/:serie/reviews', auth.required, function (req, res, next) {
   }).catch(next);
 });
 
+// Delete a review
 router.delete('/:serie/reviews/:review', auth.required, function (req, res, next) {
   if (req.review.author.toString() === req.payload.id.toString()) {
     req.serie.reviews.remove(req.review._id);
