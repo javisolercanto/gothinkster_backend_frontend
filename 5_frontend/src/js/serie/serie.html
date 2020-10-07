@@ -11,32 +11,37 @@
         <serie-actions serie="$ctrl.serie"></serie-actions>
 
       </div>
-
     </div>
   </div>
 
-
-
-  <!-- Main view. Contains article html and comments -->
+  <!-- Main view. Contains serie html and reviews -->
   <div class="container page">
-    <!-- Comments section -->
+
+    <!-- Serie info section -->
+    <img style="height: 200px; width: 400px;" ng-src="{{$ctrl.serie.image}}" />
+    <h2 style="margin-top: 20px;" ng-bind="$ctrl.serie.title"></h2>
+
+    <p ng-bind="'Seasons: ' + $ctrl.serie.seasons"></p>
+    <p ng-bind="$ctrl.serie.category"></p>
+
+    <hr/>
+
+    <!-- Reviews section -->
     <div class="row">
       <div class="col-xs-12 col-md-8 offset-md-2">
 
-        <!-- <div show-authed="true">
-          <list-errors from="$crl.commentForm.errors"></list-errors>
-          <form class="card comment-form" ng-submit="$ctrl.addComment()">
-            <fieldset ng-disabled="$ctrl.commentForm.isSubmitting">
+        <div show-authed="true">
+          <list-errors from="$crl.reviewForm.errors"></list-errors>
+          <form class="card comment-form" ng-submit="$ctrl.addReview()">
+            <fieldset ng-disabled="$ctrl.reviewForm.isSubmitting">
               <div class="card-block">
-                <textarea class="form-control"
-                  placeholder="Write a comment..."
-                  rows="3"
-                  ng-model="$ctrl.commentForm.body"></textarea>
+                <textarea class="form-control" placeholder="Write a review..." rows="3"
+                  ng-model="$ctrl.reviewForm.body"></textarea>
               </div>
               <div class="card-footer">
-                <img ng-src="{{::$ctrl.currentUser.image}}" class="comment-author-img" />
+                <img ng-src="{{$ctrl.currentUser.image}}" class="comment-author-img" />
                 <button class="btn btn-sm btn-primary" type="submit">
-                 Post Comment
+                  Post Review
                 </button>
               </div>
             </fieldset>
@@ -44,25 +49,13 @@
         </div>
 
         <div show-authed="false">
-          <a ui-sref="app.login">Sign in</a> or <a ui-sref="app.register">sign up</a> to add comments on this article.
-        </div> -->
-
-        <review ng-repeat="review in $ctrl.reviews"
-          data="review"
-          delete-cb="$ctrl.deleteReview(review.id, $index)">
-        </review>
-
-        <div ng-repeat="review in $ctrl.reviews">
-          <p>HHHHHHH</p>
-          <p>{{ review.body }}</p>
+          <a ui-sref="app.login">Sign in</a> or <a ui-sref="app.register">sign up</a> to add reviews on this serie.
         </div>
 
+        <review ng-repeat="review in $ctrl.reviews" data="review" delete-cb="$ctrl.deleteReview(review.id, $index)">
+        </review>
 
       </div>
     </div>
-
   </div>
-
-
-
 </div>

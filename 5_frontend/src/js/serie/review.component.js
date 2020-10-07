@@ -1,5 +1,5 @@
 class ReviewCtrl {
-  constructor(User) {
+  constructor(User, $scope) {
     'ngInject';
 
     setTimeout(() => {

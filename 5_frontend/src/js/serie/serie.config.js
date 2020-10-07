@@ -30,6 +30,9 @@ function SerieConfig($stateProvider) {
         },
         reviews: function (Reviews, $stateParams) {
           return Reviews.getAll($stateParams.slug).then(reviews => reviews);
+        },
+        current: function(User) {
+          return User.getCurrent();
         }
       }
     })

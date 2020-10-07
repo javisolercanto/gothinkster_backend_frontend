@@ -12,6 +12,10 @@ export default class User {
 
   }
 
+  getCurrent() {
+    return this.current;
+  }
+
   attemptAuth(type, credentials) {
     let route = (type === 'login') ? '/login' : (type === 'socialLogin') ? '/sociallogin' : '';
     return this._$http({
