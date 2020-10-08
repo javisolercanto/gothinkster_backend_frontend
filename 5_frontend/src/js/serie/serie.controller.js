@@ -1,5 +1,5 @@
 class SerieCtrl {
-  constructor(serie, reviews, current, User, Reviews, $rootScope) {
+  constructor(serie, reviews, current, Reviews, $rootScope) {
     'ngInject';
 
     this._Reviews = Reviews;
@@ -7,10 +7,6 @@ class SerieCtrl {
     this.reviews = reviews;
 
     this.currentUser = current;
-
-    setTimeout(() => {
-      this.currentUser = User.current;
-    }, 1000);
 
     $rootScope.setPageTitle(this.serie.title);
 

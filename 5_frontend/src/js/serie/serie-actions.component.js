@@ -4,13 +4,12 @@ class SerieActionsCtrl {
 
     this._Series = Series;
     this._$state = $state;
-
-    setTimeout(() => {
+    
+    this.$onInit = () => {
       if (User.current) {
         this.canModify = (User.current.username === this.serie.author.username);
       } else this.canModify = false
-      $scope.$apply();
-    }, 1000);
+    }
 
   }
 

@@ -36,6 +36,9 @@ componentsModule.component('serieMeta', SerieMeta);
 import SeriesDetails from './series-helpers/series-details.component';
 componentsModule.component('seriesDetails', SeriesDetails);
 
+import SerieFilters from './series-helpers/serie-filters.component';
+componentsModule.component('serieFilters', SerieFilters);
+
 import ListPagination from './article-helpers/list-pagination.component';
 componentsModule.component('listPagination', ListPagination);
 

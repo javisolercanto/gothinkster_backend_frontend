@@ -45,10 +45,15 @@
         <!-- <series-list series="series"></series-list> -->
       </div>
 
-      <div class="container">
+      <!-- <div class="container">
         <div ng-repeat="category in categories">
           <button ui-sref="app.series({filter: category})" style="border-width: 0px; background-color: #5db95b; color: white; margin-bottom: 15px;">{{category}}</button>
         </div>
+      </div> -->
+
+      <div class="container">
+          <serie-filters category="category" ng-repeat="category in categories">
+          </serie-filters>
       </div>
 
       <!-- <hr style="width:50%;text-align:left;margin-left:0">
