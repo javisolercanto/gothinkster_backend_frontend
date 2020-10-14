@@ -5,31 +5,44 @@
 
         <list-errors errors="$ctrl.errors"></list-errors>
 
-        <form>
+        <form name="editorForm" ng-submit="$ctrl.submitForm(true)">
           <fieldset ng-disabled="$ctrl.isSubmitting">
 
+            <!-- Title input -->
             <fieldset class="form-group">
               <input class="form-control form-control-lg"
+                name="Title"
                 ng-model="$ctrl.serie.title"
                 type="text"
-                placeholder="Title" />
+                placeholder="Title*"
+                required 
+                ng-minlength="4" ng-maxlength="20"/>
             </fieldset>
 
+            <!-- Seasons input -->
             <fieldset class="form-group">
               <input class="form-control"
+                name="Seasons"
                 ng-model="$ctrl.serie.seasons"
-                type="text"
-                placeholder="Seasons" />
+                type="number"
+                placeholder="Seasons*"
+                required 
+                min="1" max="99"/>
             </fieldset>
 
+            <!-- Catergory input -->
             <fieldset class="form-group">
               <input class="form-control"
+                name="Category"
                 ng-model="$ctrl.serie.category"
                 text="text"
-                placeholder="Category">
+                placeholder="Category*  "
+                required
+                ng-minlength="1">
             </input>
             </fieldset>
-
+          
+            <!-- Image input -->
             <fieldset class="form-group">
               <input class="form-control"
                 ng-model="$ctrl.serie.image"
@@ -38,7 +51,8 @@
             </input>
             </fieldset>
 
-            <!-- <fieldset class="form-group">
+            <!-- Tags input -->
+            <fieldset class="form-group">
               <input class="form-control"
                 type="text"
                 placeholder="Enter tags"
@@ -52,10 +66,33 @@
                   {{ tag }}
                 </span>
               </div>
-            </fieldset> -->
+            </fieldset>
 
-            <button class="btn btn-lg pull-xs-right btn-primary" type="button" ng-click="$ctrl.submit()">
-              Publish Serie
+            <!-- Title errors -->
+            <div ng-messages="editorForm.Title.$error" style="color: red; font-weight: bold" role="alert">
+              <!-- <p ng-message="required" >Title is required</p> -->
+              <p ng-message="minlength">Title is too short (4-20)</p>
+              <p ng-message="maxlength">Title is too long (4-20)</p>
+            </div>
+
+            <!-- Seasons error -->
+            <div ng-messages="editorForm.Seasons.$error" style="color: red; font-weight: bold" role="alert">
+              <!-- <p ng-message="required" >Seasons are required</p> -->
+              <p ng-message="min">Incorrect seasons number (1-99)</p>
+              <p ng-message="max">Incorrect seasons number (1-99)</p>
+            </div>
+
+            <!-- Category error -->
+            <div ng-messages="editorForm.Category.$error" style="color: red; font-weight: bold" role="alert">
+              <!-- <p ng-message="required" >Category is required</p> -->
+              <p ng-message="minlength">Category is required</p>
+            </div>
+
+            <button class="btn btn-lg pull-xs-right btn-primary" 
+              type="button"
+              ng-click="$ctrl.submit()"
+              ng-disabled="!editorForm.Title.$valid || !editorForm.Seasons.$valid || !editorForm.Category.$valid"
+              > Publish Serie
             </button>
 
           </fieldset>

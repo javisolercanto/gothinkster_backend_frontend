@@ -10,7 +10,8 @@ class SerieEditorCtrl {
         title: '',
         seasons: '',
         category: '',
-        image: ''
+        image: '',
+        tagList: []
       }
     } else {
       this.serie = serie;
@@ -18,16 +19,16 @@ class SerieEditorCtrl {
 
   }
 
-  /* addTag() {
-    if (!this.article.tagList.includes(this.tagField)) {
-      this.article.tagList.push(this.tagField);
+  addTag() {
+    if (!this.serie.tagList.includes(this.tagField)) {
+      this.serie.tagList.push(this.tagField);
       this.tagField = '';
     }
   }
 
   removeTag(tagName) {
-    this.article.tagList = this.article.tagList.filter((slug) => slug != tagName);
-  } */
+    this.serie.tagList = this.serie.tagList.filter((slug) => slug != tagName);
+  }
 
   submit() {
     this.isSubmitting = true;
