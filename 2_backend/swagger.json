@@ -293,19 +293,19 @@
           }
         }
       },
-      "/articles/feed": {
+      "/series/feed": {
         "get": {
-          "summary": "Get recent articles from users you follow",
-          "description": "Get most recent articles from users you follow. Use query parameters to limit. Auth is required",
+          "summary": "Get recent series from users you follow",
+          "description": "Get most recent series from users you follow. Use query parameters to limit. Auth is required",
           "tags": [
-            "Articles"
+            "Series"
           ],
           "security": [
             {
               "Token": []
             }
           ],
-          "operationId": "GetArticlesFeed",
+          "operationId": "GetSeriesFeed",
           "parameters": [
             {
               "name": "limit",
@@ -328,7 +328,7 @@
             "200": {
               "description": "OK",
               "schema": {
-                "$ref": "#/definitions/MultipleArticlesResponse"
+                "$ref": "#/definitions/MultipleSeriesResponse"
               }
             },
             "401": {
@@ -343,14 +343,14 @@
           }
         }
       },
-      "/articles": {
+      "/series": {
         "get": {
-          "summary": "Get recent articles globally",
-          "description": "Get most recent articles globally. Use query parameters to filter results. Auth is optional",
+          "summary": "Get recent series globally",
+          "description": "Get most recent series globally. Use query parameters to filter results. Auth is optional",
           "tags": [
-            "Articles"
+            "Series"
           ],
-          "operationId": "GetArticles",
+          "operationId": "GetSeries",
           "parameters": [
             {
               "name": "tag",
@@ -376,7 +376,7 @@
             {
               "name": "limit",
               "in": "query",
-              "description": "Limit number of articles returned (default is 20)",
+              "description": "Limit number of series returned (default is 20)",
               "required": false,
               "default": 20,
               "type": "integer"
@@ -394,7 +394,7 @@
             "200": {
               "description": "OK",
               "schema": {
-                "$ref": "#/definitions/MultipleArticlesResponse"
+                "$ref": "#/definitions/MultipleSeriesResponse"
               }
             },
             "401": {
@@ -409,25 +409,25 @@
           }
         },
         "post": {
-          "summary": "Create an article",
-          "description": "Create an article. Auth is required",
+          "summary": "Create a serie",
+          "description": "Create a serie. Auth is required",
           "tags": [
-            "Articles"
+            "Series"
           ],
           "security": [
             {
               "Token": []
             }
           ],
-          "operationId": "CreateArticle",
+          "operationId": "CreateSerie",
           "parameters": [
             {
-              "name": "article",
+              "name": "serie",
               "in": "body",
               "required": true,
-              "description": "Article to create",
+              "description": "Serie to create",
               "schema": {
-                "$ref": "#/definitions/NewArticleRequest"
+                "$ref": "#/definitions/NewSerieRequest"
               }
             }
           ],
@@ -435,7 +435,7 @@
             "201": {
               "description": "OK",
               "schema": {
-                "$ref": "#/definitions/SingleArticleResponse"
+                "$ref": "#/definitions/SingleSerieResponse"
               }
             },
             "401": {
@@ -450,20 +450,20 @@
           }
         }
       },
-      "/articles/{slug}": {
+      "/series/{slug}": {
         "get": {
-          "summary": "Get an article",
-          "description": "Get an article. Auth not required",
+          "summary": "Get a serie",
+          "description": "Get a serie. Auth not required",
           "tags": [
-            "Articles"
+            "Series"
           ],
-          "operationId": "GetArticle",
+          "operationId": "GetSerie",
           "parameters": [
             {
               "name": "slug",
               "in": "path",
               "required": true,
-              "description": "Slug of the article to get",
+              "description": "Slug of the serie to get",
               "type": "string"
             }
           ],
@@ -471,7 +471,7 @@
             "200": {
               "description": "OK",
               "schema": {
-                "$ref": "#/definitions/SingleArticleResponse"
+                "$ref": "#/definitions/SingleSerieResponse"
               }
             },
             "422": {
@@ -483,32 +483,32 @@
           }
         },
         "put": {
-          "summary": "Update an article",
-          "description": "Update an article. Auth is required",
+          "summary": "Update a serie",
+          "description": "Update a serie. Auth is required",
           "tags": [
-            "Articles"
+            "Series"
           ],
           "security": [
             {
               "Token": []
             }
           ],
-          "operationId": "UpdateArticle",
+          "operationId": "UpdateSerie",
           "parameters": [
             {
               "name": "slug",
               "in": "path",
               "required": true,
-              "description": "Slug of the article to update",
+              "description": "Slug of the serie to update",
               "type": "string"
             },
             {
-              "name": "article",
+              "name": "serie",
               "in": "body",
               "required": true,
-              "description": "Article to update",
+              "description": "Serie to update",
               "schema": {
-                "$ref": "#/definitions/UpdateArticleRequest"
+                "$ref": "#/definitions/UpdateSerieRequest"
               }
             }
           ],
@@ -516,7 +516,7 @@
             "200": {
               "description": "OK",
               "schema": {
-                "$ref": "#/definitions/SingleArticleResponse"
+                "$ref": "#/definitions/SingleSerieResponse"
               }
             },
             "401": {
@@ -531,23 +531,23 @@
           }
         },
         "delete": {
-          "summary": "Delete an article",
-          "description": "Delete an article. Auth is required",
+          "summary": "Delete a serie",
+          "description": "Delete a serie. Auth is required",
           "tags": [
-            "Articles"
+            "Series"
           ],
           "security": [
             {
               "Token": []
             }
           ],
-          "operationId": "DeleteArticle",
+          "operationId": "DeleteSerie",
           "parameters": [
             {
               "name": "slug",
               "in": "path",
               "required": true,
-              "description": "Slug of the article to delete",
+              "description": "Slug of the serie to delete",
               "type": "string"
             }
           ],
@@ -567,20 +567,20 @@
           }
         }
       },
-      "/articles/{slug}/comments": {
+      "/series/{slug}/reviews": {
         "get": {
-          "summary": "Get comments for an article",
-          "description": "Get the comments for an article. Auth is optional",
+          "summary": "Get reviews for a serie",
+          "description": "Get the reviews for a serie. Auth is optional",
           "tags": [
-            "Comments"
+            "Reviews"
           ],
-          "operationId": "GetArticleComments",
+          "operationId": "GetSerieReviews",
           "parameters": [
             {
               "name": "slug",
               "in": "path",
               "required": true,
-              "description": "Slug of the article that you want to get comments for",
+              "description": "Slug of the serie that you want to get reviews for",
               "type": "string"
             }
           ],
@@ -588,7 +588,7 @@
             "200": {
               "description": "OK",
               "schema": {
-                "$ref": "#/definitions/MultipleCommentsResponse"
+                "$ref": "#/definitions/MultipleReviewsResponse"
               }
             },
             "401": {
@@ -603,32 +603,32 @@
           }
         },
         "post": {
-          "summary": "Create a comment for an article",
-          "description": "Create a comment for an article. Auth is required",
+          "summary": "Create a review for a serie",
+          "description": "Create a review for a serie. Auth is required",
           "tags": [
-            "Comments"
+            "Reviews"
           ],
           "security": [
             {
               "Token": []
             }
           ],
-          "operationId": "CreateArticleComment",
+          "operationId": "CreateSerieReview",
           "parameters": [
             {
               "name": "slug",
               "in": "path",
               "required": true,
-              "description": "Slug of the article that you want to create a comment for",
+              "description": "Slug of the serie that you want to create a review for",
               "type": "string"
             },
             {
-              "name": "comment",
+              "name": "review",
               "in": "body",
               "required": true,
-              "description": "Comment you want to create",
+              "description": "Review you want to create",
               "schema": {
-                "$ref": "#/definitions/NewCommentRequest"
+                "$ref": "#/definitions/NewReviewRequest"
               }
             }
           ],
@@ -636,7 +636,7 @@
             "200": {
               "description": "OK",
               "schema": {
-                "$ref": "#/definitions/SingleCommentResponse"
+                "$ref": "#/definitions/SingleReviewResponse"
               }
             },
             "401": {
@@ -651,32 +651,32 @@
           }
         }
       },
-      "/articles/{slug}/comments/{id}": {
+      "/series/{slug}/reviews/{id}": {
         "delete": {
-          "summary": "Delete a comment for an article",
-          "description": "Delete a comment for an article. Auth is required",
+          "summary": "Delete a review for a serie",
+          "description": "Delete a review for a serie. Auth is required",
           "tags": [
-            "Comments"
+            "Reviews"
           ],
           "security": [
             {
               "Token": []
             }
           ],
-          "operationId": "DeleteArticleComment",
+          "operationId": "DeleteSerieReview",
           "parameters": [
             {
               "name": "slug",
               "in": "path",
               "required": true,
-              "description": "Slug of the article that you want to delete a comment for",
+              "description": "Slug of the serie that you want to delete a review for",
               "type": "string"
             },
             {
               "name": "id",
               "in": "path",
               "required": true,
-              "description": "ID of the comment you want to delete",
+              "description": "ID of the review you want to delete",
               "type": "integer"
             }
           ],
@@ -696,10 +696,10 @@
           }
         }
       },
-      "/articles/{slug}/favorite": {
+      "/series/{slug}/favorite": {
         "post": {
-          "summary": "Favorite an article",
-          "description": "Favorite an article. Auth is required",
+          "summary": "Favorite a serie",
+          "description": "Favorite a serie. Auth is required",
           "tags": [
             "Favorites"
           ],
@@ -708,13 +708,13 @@
               "Token": []
             }
           ],
-          "operationId": "CreateArticleFavorite",
+          "operationId": "CreateSerieFavorite",
           "parameters": [
             {
               "name": "slug",
               "in": "path",
               "required": true,
-              "description": "Slug of the article that you want to favorite",
+              "description": "Slug of the serie that you want to favorite",
               "type": "string"
             }
           ],
@@ -722,7 +722,7 @@
             "200": {
               "description": "OK",
               "schema": {
-                "$ref": "#/definitions/SingleArticleResponse"
+                "$ref": "#/definitions/SingleSerieResponse"
               }
             },
             "401": {
@@ -737,8 +737,8 @@
           }
         },
         "delete": {
-          "summary": "Unfavorite an article",
-          "description": "Unfavorite an article. Auth is required",
+          "summary": "Unfavorite a serie",
+          "description": "Unfavorite a serie. Auth is required",
           "tags": [
             "Favorites"
           ],
@@ -747,13 +747,13 @@
               "Token": []
             }
           ],
-          "operationId": "DeleteArticleFavorite",
+          "operationId": "DeleteSerieFavorite",
           "parameters": [
             {
               "name": "slug",
               "in": "path",
               "required": true,
-              "description": "Slug of the article that you want to unfavorite",
+              "description": "Slug of the serie that you want to unfavorite",
               "type": "string"
             }
           ],
@@ -761,7 +761,7 @@
             "200": {
               "description": "OK",
               "schema": {
-                "$ref": "#/definitions/SingleArticleResponse"
+                "$ref": "#/definitions/SingleSerieResponse"
               }
             },
             "401": {
@@ -959,7 +959,35 @@
           "following"
         ]
       },
-      "Article": {
+      "TagsResponse": {
+        "type": "object",
+        "properties": {
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "tags"
+        ]
+      },
+      "SeriesResponse": {
+        "type": "object",
+        "properties": {
+          "series": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "series"
+        ]
+      },
+      "Serie": {
         "type": "object",
         "properties": {
           "slug": {
@@ -968,10 +996,13 @@
           "title": {
             "type": "string"
           },
-          "description": {
+          "seasons": {
+            "type": "number"
+          },
+          "image": {
             "type": "string"
           },
-          "body": {
+          "category": {
             "type": "string"
           },
           "tagList": {
@@ -1001,8 +1032,9 @@
         "required": [
           "slug",
           "title",
-          "description",
-          "body",
+          "seasons",
+          "image",
+          "category",
           "tagList",
           "createdAt",
           "updatedAt",
@@ -1011,45 +1043,19 @@
           "author"
         ]
       },
-      "SingleArticleResponse": {
-        "type": "object",
-        "properties": {
-          "article": {
-            "$ref": "#/definitions/Article"
-          }
-        },
-        "required": [
-          "article"
-        ]
-      },
-      "MultipleArticlesResponse": {
-        "type": "object",
-        "properties": {
-          "articles": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/Article"
-            }
-          },
-          "articlesCount": {
-            "type": "integer"
-          }
-        },
-        "required": [
-          "articles",
-          "articlesCount"
-        ]
-      },
-      "NewArticle": {
+      "NewSerie": {
         "type": "object",
         "properties": {
           "title": {
             "type": "string"
           },
-          "description": {
+          "seasons": {
+            "type": "number"
+          },
+          "image": {
             "type": "string"
           },
-          "body": {
+          "category": {
             "type": "string"
           },
           "tagList": {
@@ -1061,47 +1067,80 @@
         },
         "required": [
           "title",
-          "description",
-          "body"
+          "seasons",
+          "image",
+          "category"
         ]
       },
-      "NewArticleRequest": {
+      "NewSerieRequest": {
         "type": "object",
         "properties": {
-          "article": {
-            "$ref": "#/definitions/NewArticle"
+          "serie": {
+            "$ref": "#/definitions/NewSerie"
           }
         },
         "required": [
-          "article"
+          "serie"
         ]
       },
-      "UpdateArticle": {
+      "UpdateSerie": {
         "type": "object",
         "properties": {
           "title": {
             "type": "string"
           },
-          "description": {
+          "seasons": {
+            "type": "number"
+          },
+          "image": {
             "type": "string"
           },
-          "body": {
+          "category": {
             "type": "string"
           }
         }
       },
-      "UpdateArticleRequest": {
+      "UpdateSerieRequest": {
         "type": "object",
         "properties": {
-          "article": {
-            "$ref": "#/definitions/UpdateArticle"
+          "serie": {
+            "$ref": "#/definitions/UpdateSerie"
           }
         },
         "required": [
-          "article"
+          "serie"
         ]
       },
-      "Comment": {
+      "SingleSerieResponse": {
+        "type": "object",
+        "properties": {
+          "serie": {
+            "$ref": "#/definitions/Serie"
+          }
+        },
+        "required": [
+          "serie"
+        ]
+      },
+      "MultipleSeriesResponse": {
+        "type": "object",
+        "properties": {
+          "series": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Serie"
+            }
+          },
+          "seriesCount": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "series",
+          "seriesCount"
+        ]
+      },
+      "Review": {
         "type": "object",
         "properties": {
           "id": {
@@ -1130,32 +1169,32 @@
           "author"
         ]
       },
-      "SingleCommentResponse": {
+      "SingleReviewResponse": {
         "type": "object",
         "properties": {
-          "comment": {
-            "$ref": "#/definitions/Comment"
+          "review": {
+            "$ref": "#/definitions/Review"
           }
         },
         "required": [
-          "comment"
+          "review"
         ]
       },
-      "MultipleCommentsResponse": {
+      "MultipleReviewsResponse": {
         "type": "object",
         "properties": {
-          "comments": {
+          "reviews": {
             "type": "array",
             "items": {
-              "$ref": "#/definitions/Comment"
+              "$ref": "#/definitions/Review"
             }
           }
         },
         "required": [
-          "comments"
+          "reviews"
         ]
       },
-      "NewComment": {
+      "NewReview": {
         "type": "object",
         "properties": {
           "body": {
@@ -1166,29 +1205,15 @@
           "body"
         ]
       },
-      "NewCommentRequest": {
+      "NewReviewRequest": {
         "type": "object",
         "properties": {
           "comment": {
-            "$ref": "#/definitions/NewComment"
+            "$ref": "#/definitions/NewReview"
           }
         },
         "required": [
-          "comment"
-        ]
-      },
-      "TagsResponse": {
-        "type": "object",
-        "properties": {
-          "tags": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        },
-        "required": [
-          "tags"
+          "review"
         ]
       },
       "GenericErrorModel": {

@@ -51,12 +51,23 @@ router.get('/', auth.optional, function (req, res, next) {
   var limit = 20;
   var offset = 0;
 
+  console.log("1111 QUEYYY");
+  console.log(req.query);
+
   if (typeof req.query.limit !== 'undefined') {
     limit = req.query.limit;
   }
 
   if (typeof req.query.offset !== 'undefined') {
     offset = req.query.offset;
+  }
+
+  if (typeof req.query.tag !== 'undefined' ){
+    query.tagList = {"$in" : [req.query.tag]};
+  }
+
+  if (typeof req.query.category !== 'undefined' ){
+    query.category = {"$in" : [req.query.category]};
   }
 
   Promise.all([
@@ -107,6 +118,43 @@ router.get('/categories', auth.optional, function (req, res, next) {
   });
 });
 
+// Return feed
+router.get('/feed', auth.required, function(req, res, next) {
+  var limit = 20;
+  var offset = 0;
+
+  if(typeof req.query.limit !== 'undefined'){
+    limit = req.query.limit;
+  }
+
+  if(typeof req.query.offset !== 'undefined'){
+    offset = req.query.offset;
+  }
+
+  User.findById(req.payload.id).then(function(user){
+    if (!user) { return res.sendStatus(401); }
+
+    Promise.all([
+      Serie.find({ author: {$in: user.following}})
+        .limit(Number(limit))
+        .skip(Number(offset))
+        .populate('author')
+        .exec(),
+      Serie.count({ author: {$in: user.following}})
+    ]).then(function(results){
+      var series = results[0];
+      var seriesCount = results[1];
+
+      return res.json({
+        series: series.map(function(serie){
+          return serie.toJSONFor(user);
+        }),
+        seriesCount: seriesCount
+      });
+    }).catch(next);
+  });
+});
+
 // Get a serie
 router.get('/:serie', auth.optional, function (req, res, next) {
   Promise.all([
@@ -139,6 +187,14 @@ router.put('/:serie', auth.required, function (req, res, next) {
 
       if (typeof req.body.serie.category !== 'undefined') {
         req.serie.category = req.body.serie.category;
+      }
+
+      if (typeof req.body.serie.category !== 'undefined') {
+        req.serie.category = req.body.serie.category;
+      }
+
+      if(typeof req.body.serie.tagList !== 'undefined'){
+        req.serie.tagList = req.body.serie.tagList
       }
 
       req.serie.save().then(function (serie) {
