@@ -6,7 +6,7 @@ function getRandom(min, max) {
 }
 
 exports.IsAdminUser = async function (id) {
-    let user = await User.findById(id).populate('type');
+    let user = await User.findById(id);
     return user.isAdmin();
 }
 

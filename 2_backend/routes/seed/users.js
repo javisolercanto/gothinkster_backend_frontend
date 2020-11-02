@@ -63,11 +63,9 @@ router.delete('/:username', async function (req, res, next) {
     }
 });
 
-router.get('/', auth.required, async function (req, res, next) {
+router.get('/isAdmin', auth.required, async function (req, res, next) {
     try {
-
         let isAdmin = await utils.IsAdminUser(req.payload.id);
-
         return res.status(201).send({ "isAdmin": isAdmin });
     } catch (e) {
         next(e)
