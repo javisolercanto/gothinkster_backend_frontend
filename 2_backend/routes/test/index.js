@@ -1,5 +1,5 @@
 var router = require('express').Router();
 
-router.use('/test_search', require('./test_search'));
+router.use('/test', require('./test'));
 
 module.exports = router;

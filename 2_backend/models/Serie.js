@@ -39,7 +39,7 @@ SerieSchema.methods.updateFavoriteCount = function() {
   });
 };
 
-SerieSchema.methods.toJSONFor = function(user, category){
+SerieSchema.methods.toJSONFor = function(user){
   
   return {
     slug: this.slug,

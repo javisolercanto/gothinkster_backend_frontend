@@ -54,69 +54,6 @@ router.put('/user', auth.required, function (req, res, next) {
         return res.json({ user: user.toAuthJSON() });
       }).catch(next);
     }
-
-    /* if (!usernameChanged && !emailChanged) {
-      console.log("1");
-      console.log(user.username);
-      user.save().then(function () {
-        return res.json({ user: user.toAuthJSON() });
-      }).catch(next)
-    } else if (usernameChanged && emailChanged) {
-      console.log("2");
-      User.find({ $or: [{ email: req.body.user.email }, { username: req.body.user.username }] })
-        .then((user) => {
-          if (user[0]) return res.status(422).json("The email or username is already taken");
-          else {
-            var user = new User();
-
-            user.username = req.body.user.username;
-            user.email = req.body.user.email;
-            user.setPassword(req.body.user.password);
-
-            user.save().then(function () {
-              return res.json({ user: user.toAuthJSON() });
-            }).catch(next);
-          }
-        }).catch(next);
-    } else if (usernameChanged) {
-      console.log("3");
-      User.find({ $or: [{ username: req.body.user.username }] })
-        .then((user) => {
-          if (user[0]) return res.status(422).json("The username is already taken");
-          else {
-            var user = new User();
-
-            user.username = req.body.user.username;
-            user.email = req.body.user.email;
-            user.setPassword(req.body.user.password);
-
-            console.log(user);
-
-            user.save().then(function () {
-              return res.json({ user: user.toAuthJSON() });
-            }).catch(next);
-          }
-        }).catch(next);
-    } else if (emailChanged) {
-      console.log("4");
-      User.find({ $or: [{ email: req.body.user.email }] })
-        .then((user) => {
-          if (user[0]) return res.status(422).json("The email is already taken");
-          else {
-            var user = new User();
-
-            user.username = req.body.user.username;
-            user.email = req.body.user.email;
-            user.setPassword(req.body.user.password);
-
-            user.save().then(function () {
-              return res.json({ user: user.toAuthJSON() });
-            }).catch(next);
-          }
-        }).catch(next);
-    } else {
-      return res.status(422).json("You must change something");
-    } */
   });
 });
 
@@ -153,6 +90,7 @@ router.post('/users', function (req, res, next) {
         user.username = req.body.user.username;
         user.email = req.body.user.email;
         user.setPassword(req.body.user.password);
+        user.type = false;
 
         user.save().then(function () {
           return res.json({ user: user.toAuthJSON() });

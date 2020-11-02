@@ -51,9 +51,6 @@ router.get('/', auth.optional, function (req, res, next) {
   var limit = 20;
   var offset = 0;
 
-  console.log("1111 QUEYYY");
-  console.log(req.query);
-
   if (typeof req.query.limit !== 'undefined') {
     limit = req.query.limit;
   }
@@ -222,33 +219,43 @@ router.delete('/:serie', auth.required, function (req, res, next) {
 });
 
 // Favorite an serie
-router.post('/:serie/favorite', auth.required, function (req, res, next) {
+router.post('/:serie/favorite', auth.required, async function (req, res, next) {
   var serieId = req.serie._id;
 
-  User.findById(req.payload.id).then(function (user) {
-    if (!user) { return res.sendStatus(401); }
+  try {
+    let user = await User.findById(req.payload.id);
 
-    return user.favorite(serieId).then(function () {
-      return req.serie.updateFavoriteCount().then(function (serie) {
-        return res.json({ serie: serie.toJSONFor(user) });
-      });
-    });
-  }).catch(next);
+    if (!user) return res.status(404).send({response: "user error"});
+
+    await user.favorite(serieId);
+    await req.serie.updateFavoriteCount();
+    await user.updateKarma(true, 40);
+
+    return res.json({ serie: req.serie.toJSONFor(user) });
+
+  } catch (e) {
+    next(e);
+  }
 });
 
 // Unfavorite an serie
-router.delete('/:serie/favorite', auth.required, function (req, res, next) {
+router.delete('/:serie/favorite', auth.required, async function (req, res, next) {
   var serieId = req.serie._id;
 
-  User.findById(req.payload.id).then(function (user) {
-    if (!user) { return res.sendStatus(401); }
+  try {
+    let user = await User.findById(req.payload.id);
 
-    return user.unfavorite(serieId).then(function () {
-      return req.serie.updateFavoriteCount().then(function (serie) {
-        return res.json({ serie: serie.toJSONFor(user) });
-      });
-    });
-  }).catch(next);
+    if (!user) return res.status(404).send({response: "user error"});
+
+    await user.unfavorite(serieId);
+    await req.serie.updateFavoriteCount();
+    await user.updateKarma(false, 40);
+
+    return res.json({ serie: req.serie.toJSONFor(user) });
+
+  } catch (e) {
+    next(e);
+  }
 });
 
 // Get reviews of a serie
@@ -283,9 +290,10 @@ router.post('/:serie/reviews', auth.required, function (req, res, next) {
     review.serie = req.serie;
     review.author = user;
 
-    return review.save().then(function () {
+    return review.save().then(async function () {
       req.serie.reviews === undefined ? req.serie.reviews = [] : req.serie.reviews = req.serie.reviews.concat(review);
-      /* req.serie.reviews.push(review); */
+      
+      await user.updateKarma(true, 40);
 
       return req.serie.save().then(function (serie) {
         res.json({ review: review.toJSONFor(user) });
@@ -295,9 +303,11 @@ router.post('/:serie/reviews', auth.required, function (req, res, next) {
 });
 
 // Delete a review
-router.delete('/:serie/reviews/:review', auth.required, function (req, res, next) {
+router.delete('/:serie/reviews/:review', auth.required, async function (req, res, next) {
   if (req.review.author.toString() === req.payload.id.toString()) {
     req.serie.reviews.remove(req.review._id);
+    let user = await User.findById(req.review.author);
+    await user.updateKarma(false, 40);
     req.serie.save()
       .then(Review.find({ _id: req.review._id }).remove().exec())
       .then(function () {

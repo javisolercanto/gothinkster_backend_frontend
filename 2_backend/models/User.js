@@ -10,10 +10,12 @@ var UserSchema = new mongoose.Schema({
   email: {type: String, lowercase: true, unique: true, required: [true, "can't be blank"], match: [/\S+@\S+\.\S+/, 'is invalid'], index: true},
   bio: String,
   image: String,
+  karma: {type: Number, default: 0},
   favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Serie' }],
   following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   hash: String,
-  salt: String
+  salt: String,
+  type: Boolean,
 }, {timestamps: true});
 
 UserSchema.plugin(uniqueValidator, {message: 'is already taken.'});
@@ -55,7 +57,8 @@ UserSchema.methods.toProfileJSONFor = function(user){
     username: this.username,
     bio: this.bio,
     image: this.image || 'https://static.productionready.io/images/smiley-cyrus.jpg',
-    following: user ? user.isFollowing(this._id) : false
+    following: user ? user.isFollowing(this._id) : false,
+    karma: this.karma
   };
 };
 
@@ -95,6 +98,15 @@ UserSchema.methods.isFollowing = function(id){
   return this.following.some(function(followId){
     return followId.toString() === id.toString();
   });
+};
+
+UserSchema.methods.updateKarma = function(karma, qty) {
+  karma ? this.karma += qty : this.karma -= qty;
+  return this.save();
+}
+
+UserSchema.methods.isAdmin = function(){
+  return this.type;
 };
 
 mongoose.model('User', UserSchema);
