@@ -8,6 +8,15 @@ export default class Series {
       
     }
 
+    query(config) {
+      let request = {
+        url: this._AppConstants.api + '/series' + ((config.type === 'feed') ? '/feed' : ''),
+        method: 'GET',
+        params: config.filters ? config.filters : null
+      };
+      return this._$http(request).then((res) => res.data);
+    }
+
     getSeries() {
       return this._$http({
         url: this._AppConstants.api + "/series",
@@ -59,7 +68,7 @@ export default class Series {
   
     save(serie) {
       let request = {};
-  
+
       if (serie.slug) {
         request.url = `${this._AppConstants.api}/series/${serie.slug}`;
         request.method = 'PUT';

@@ -16,12 +16,11 @@
       <!-- Main view - contains tabs & article list -->
       <div class="col-md-9">
         <!-- Tabs for toggling between feed, article lists -->
-        <!--   <div class="feed-toggle">
+        <div class="feed-toggle">
           <ul class="nav nav-pills outline-active">
 
             <li class="nav-item" show-authed="true">
-              <a href="" class="nav-link"
-                ng-class="{ active: $ctrl.listConfig.type === 'feed' }"
+              <a href="" class="nav-link" ng-class="{ active: $ctrl.listConfig.type === 'feed' }"
                 ng-click="$ctrl.changeList({ type: 'feed' })">
                 Your Feed
               </a>
@@ -41,22 +40,17 @@
               </a>
             </li>
 
-          </ul> -->
-        <!-- <series-list series="series"></series-list> -->
-      </div>
+          </ul>
+          <series-list limit="3" list-config="$ctrl.listConfig"></series-list>
+        </div>
 
-      <!-- <div class="container">
+        <!-- <div class="container">
         <div ng-repeat="category in categories">
           <button ui-sref="app.series({filter: category})" style="border-width: 0px; background-color: #5db95b; color: white; margin-bottom: 15px;">{{category}}</button>
         </div>
       </div> -->
 
-      <div class="container">
-          <serie-filters category="category" ng-repeat="category in categories">
-          </serie-filters>
-      </div>
-
-      <!-- <hr style="width:50%;text-align:left;margin-left:0">
+        <!-- <hr style="width:50%;text-align:left;margin-left:0">
 
       <div class="col-md-9">
         <div class="container" ng-repeat="movie in movies">
@@ -69,25 +63,24 @@
         </div>
       </div> -->
 
-      <!-- List the current articles -->
-      <!-- <article-list limit="10" list-config="$ctrl.listConfig"></article-list> -->
+        <!-- List the current articles -->
+        <!-- <article-list limit="10" list-config="$ctrl.listConfig"></article-list> -->
 
-      <!-- Filtered by number of seasons > 3 (COMPONENT) -->
+        <!-- Filtered by number of seasons > 3 (COMPONENT) -->
 
-      <!-- Filtered by releaseYear > 1996 (NO-COMPONENT) -->
+        <!-- Filtered by releaseYear > 1996 (NO-COMPONENT) -->
 
-    </div>
+      </div>
 
-    <!-- Sidebar where popular tags are listed -->
-    <!-- <div class="col-md-3">
+      <!-- Sidebar where popular tags are listed -->
+      <div class="col-md-3">
         <div class="sidebar">
 
           <p>Popular Tags</p>
 
           <div class="tag-list" ng-show="$ctrl.tags">
             <a href="" class="tag-default tag-pill"
-              ng-click="$ctrl.changeList({ type: 'all', filters: { tag: tagName } })"
-              ng-repeat="tagName in $ctrl.tags"
+              ng-click="$ctrl.changeList({ type: 'all', filters: { tag: tagName } })" ng-repeat="tagName in $ctrl.tags"
               ng-bind="tagName">
             </a>
           </div>
@@ -96,16 +89,25 @@
             Loading tags...
           </div>
 
-          <div class="post-preview"
-            ng-show="$ctrl.tagsLoaded && !$ctrl.tags.length">
+          <div class="post-preview" ng-show="$ctrl.tagsLoaded && !$ctrl.tags.length">
             No tags are here... yet.
           </div>
 
-        </div>
-      </div> -->
+          <hr/>
 
-    <!-- End the row & container divs -->
+          <p>Categories</p>
+
+          <div>
+            <serie-filters category="category" ng-repeat="category in categories">
+            </serie-filters>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- End the row & container divs -->
+    </div>
   </div>
-</div>
 
 </div>

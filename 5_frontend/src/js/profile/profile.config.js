@@ -18,8 +18,21 @@ function ProfileConfig($stateProvider) {
     }
 
   })
-
   .state('app.profile.main', {
+    url:'',
+    controller: 'ProfileSeriesCtrl',
+    controllerAs: '$ctrl',
+    templateUrl: 'profile/profile-series.html',
+    title: 'Profile'
+  })
+  .state('app.profile.favorites', {
+    url:'/favorites',
+    controller: 'ProfileSeriesCtrl',
+    controllerAs: '$ctrl',
+    templateUrl: 'profile/profile-series.html',
+    title: 'Favorites'
+  });
+  /* .state('app.profile.main', {
     url:'',
     controller: 'ProfileArticlesCtrl',
     controllerAs: '$ctrl',
@@ -32,7 +45,7 @@ function ProfileConfig($stateProvider) {
     controllerAs: '$ctrl',
     templateUrl: 'profile/profile-articles.html',
     title: 'Favorites'
-  });
+  }); */
 
 };
 

@@ -5,7 +5,7 @@ class MovieCtrl {
     'ngInject';
 
     this._$scope = $scope;
-    this._$scope.movies = movies;
+    this._$scope.movies = movies.movies;
     this.currentUser = User.current;
   }
 }

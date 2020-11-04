@@ -11,8 +11,11 @@ profileModule.config(ProfileConfig);
 import ProfileCtrl from './profile.controller';
 profileModule.controller('ProfileCtrl', ProfileCtrl);
 
-import ProfileArticlesCtrl from './profile-articles.controller';
-profileModule.controller('ProfileArticlesCtrl', ProfileArticlesCtrl);
+/* import ProfileArticlesCtrl from './profile-articles.controller';
+profileModule.controller('ProfileArticlesCtrl', ProfileArticlesCtrl); */
+
+import ProfileSeriesCtrl from './profile-series.controller';
+profileModule.controller('ProfileSeriesCtrl', ProfileSeriesCtrl);
 
 
 export default profileModule;

@@ -9,5 +9,11 @@
 
 <serie-preview
   serie="serie"
-  ng-repeat="serie in $ctrl.series">
+  ng-repeat="serie in $ctrl.list">
 </serie-preview>
+
+<serie-list-pagination
+  total-pages="$ctrl.listConfig.totalPages"
+  current-page="$ctrl.listConfig.currentPage"
+  ng-hide="$ctrl.listConfig.totalPages <= 1">
+</serie-list-pagination>

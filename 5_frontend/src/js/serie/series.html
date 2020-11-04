@@ -1,8 +1,9 @@
-<div ng-show="filter" class="container">
+<div ng-hide="$ctrl.category == undefined" class="container">
     <button style="border-width: 0px; background-color: #5db95b; color: white; margin-bottom: 15px;"
-        ui-sref="app.series({filter: ''})">Clear filter: {{ filter }}</button>
+        ui-sref="app.series({filter: ''})"
+        ng-bind="'Clear filter: '  + $ctrl.category"></button>
 </div>
 
 <div class="container">
-    <series-list series="series" ></series-list>
+    <series-list limit="3" list-config="$ctrl.listConfig"></series-list>
 </div>

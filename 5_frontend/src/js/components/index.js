@@ -18,6 +18,9 @@ componentsModule.component('articleMeta', ArticleMeta);
 import FavoriteBtn from './buttons/favorite-btn.component';
 componentsModule.component('favoriteBtn', FavoriteBtn);
 
+import RateBtn from './buttons/rate-btn.component';
+componentsModule.component('rateBtn', RateBtn);
+
 import ArticlePreview from './article-helpers/article-preview.component';
 componentsModule.component('articlePreview', ArticlePreview);
 
@@ -33,14 +36,14 @@ componentsModule.component('seriePreview', SeriePreview);
 import SerieMeta from './series-helpers/serie-meta.component';
 componentsModule.component('serieMeta', SerieMeta);
 
-import SeriesDetails from './series-helpers/series-details.component';
-componentsModule.component('seriesDetails', SeriesDetails);
-
 import SerieFilters from './series-helpers/serie-filters.component';
 componentsModule.component('serieFilters', SerieFilters);
 
 import ListPagination from './article-helpers/list-pagination.component';
 componentsModule.component('listPagination', ListPagination);
+
+import SerieListPagination from './series-helpers/serie-list-pagination.component';
+componentsModule.component('serieListPagination', SerieListPagination);
 
 import HomeSlider from './home-helpers/home-slider.component';
 componentsModule.component('homeSlider', HomeSlider);

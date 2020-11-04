@@ -25,7 +25,6 @@ class HomeCtrl {
     this._$scope.movies = moviesFiltered;
     this._$scope.series = seriesFiltered;
 
-
     // Get list of all tags
     Tags
       .getAll()
@@ -40,7 +39,6 @@ class HomeCtrl {
     this.listConfig = {
       type: User.current ? 'feed' : 'all'
     };
-
   }
 
   changeList(newList) {

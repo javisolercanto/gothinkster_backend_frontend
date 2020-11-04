@@ -17,12 +17,25 @@
   <!-- Main view. Contains serie html and reviews -->
   <div class="container page">
 
+
     <!-- Serie info section -->
+
+    <ul class="tag-list">
+      <li class="tag-default tag-pill tag-outline"
+        ng-repeat="tag in $ctrl.serie.tagList">
+        {{tag}}
+      </li>
+    </ul>
+
+    <br>
+
     <img style="height: 200px; width: 400px;" ng-src="{{$ctrl.serie.image}}" />
     <h2 style="margin-top: 20px;" ng-bind="$ctrl.serie.title"></h2>
 
     <p ng-bind="'Seasons: ' + $ctrl.serie.seasons"></p>
     <p ng-bind="$ctrl.serie.category"></p>
+
+    <!-- ng-click="$ctrl.changeList({ type: 'all', filters: { category:  $ctrl.serie.category} })" -->
 
     <a class="btn btn-sm btn-outline-primary"
       ui-sref="app.series({ filter: $ctrl.serie.category })">
@@ -37,10 +50,10 @@
 
         <div show-authed="true">
           <list-errors from="$crl.reviewForm.errors"></list-errors>
-          <form class="card comment-form" ng-submit="$ctrl.addReview()">
+          <form name="reviewForm" class="card comment-form" ng-submit="$ctrl.addReview()">
             <fieldset ng-disabled="$ctrl.reviewForm.isSubmitting">
               <div class="card-block">
-                <textarea class="form-control" placeholder="Write a review..." rows="3"
+                <textarea required class="form-control" placeholder="Write a review..." rows="3"
                   ng-model="$ctrl.reviewForm.body"></textarea>
               </div>
               <div class="card-footer">

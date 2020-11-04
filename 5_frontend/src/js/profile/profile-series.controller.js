@@ -1,4 +1,4 @@
-class ProfileArticlesCtrl {
+class ProfileSeriesCtrl {
   constructor(profile, $state, $rootScope) {
     'ngInject';
 
@@ -7,7 +7,7 @@ class ProfileArticlesCtrl {
 
     this.profileState = $state.current.name.replace('app.profile.', '');
 
-    // Both favorites and author articles require the 'all' type
+    // Both favorites and author series require the 'all' type
     this.listConfig = { type: 'all' };
 
     // `main` state's filter should be by author
@@ -19,10 +19,10 @@ class ProfileArticlesCtrl {
     } else if (this.profileState === 'favorites') {
       this.listConfig.filters = {favorited: this.profile.username};
       // Set page title
-      $rootScope.setPageTitle(`Articles favorited by ${this.profile.username}`);
+      $rootScope.setPageTitle(`Series favorited by ${this.profile.username}`);
     }
 
   }
 }
 
-export default ProfileArticlesCtrl;
+export default ProfileSeriesCtrl;

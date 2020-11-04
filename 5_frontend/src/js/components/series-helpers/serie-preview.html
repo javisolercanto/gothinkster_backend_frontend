@@ -9,6 +9,13 @@
 
   <a ui-sref="app.serie({ slug: $ctrl.serie.slug })" class="preview-link">
     <h1 ng-bind="$ctrl.serie.title"></h1>
-    <p>{{ $ctrl.serie.category }}</p>
+    <p ng-bind="$ctrl.serie.category"></p>
+    <span>Read more...</span>
+    <ul class="tag-list">
+      <li class="tag-default tag-pill tag-outline"
+        ng-repeat="tag in $ctrl.serie.tagList">
+        {{tag}}
+      </li>
+    </ul>
   </a>
 </div>

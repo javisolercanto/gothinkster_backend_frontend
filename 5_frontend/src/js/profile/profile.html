@@ -9,6 +9,7 @@
           <img ng-src="{{::$ctrl.profile.image}}" class="user-img" />
           <h4 ng-bind="::$ctrl.profile.username"></h4>
           <p ng-bind="::$ctrl.profile.bio"></p>
+          <p ng-bind="::$ctrl.profile.karma"></p>
 
           <a ui-sref="app.settings"
             class="btn btn-sm btn-outline-secondary action-btn"
@@ -37,7 +38,7 @@
               <a class="nav-link active"
                 ui-sref-active="active"
                 ui-sref="app.profile.main({username: $ctrl.profile.username})">
-                My Articles
+                My Series
               </a>
             </li>
 
@@ -45,7 +46,7 @@
               <a class="nav-link"
                 ui-sref-active="active"
                 ui-sref="app.profile.favorites({username: $ctrl.profile.username})">
-                Favorited Articles
+                Favorited Series
               </a>
             </li>
 
@@ -54,7 +55,6 @@
 
         <!-- List of articles -->
         <div ui-view></div>
-
 
       </div>
 
