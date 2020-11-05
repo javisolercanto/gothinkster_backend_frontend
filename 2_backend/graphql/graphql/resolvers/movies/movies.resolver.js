@@ -4,8 +4,8 @@ const User = mongoose.model('User');
 
 const resolvers = {
     Query: {
-        movie: (root, {slug}) => {
-            return Movie.findOne({slug: slug}).exec();
+        movie: (root, { slug }) => {
+            return Movie.findOne({ slug: slug }).exec();
         },
         movies: async () => {
             return Movie.find().exec();
@@ -16,11 +16,11 @@ const resolvers = {
         author: async (parent) => {
             return await (await User.findById(parent.author)
                 .populate({
-                path: 'following',
-                populate: {
                     path: 'following',
-                    model: 'User'
-                }
+                    populate: {
+                        path: 'following',
+                        model: 'User'
+                    }
                 }).exec());
         }
     }

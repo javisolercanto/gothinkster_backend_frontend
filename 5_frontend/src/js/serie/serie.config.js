@@ -16,7 +16,7 @@ function SerieConfig($stateProvider) {
       title: 'Serie',
       resolve: {
         series: function (Series, $state) {
-          return Series.getGraph().then(
+          return Series.getSeries().then(
             (series) => series,
             (err) => $state.go('app.home')
           )

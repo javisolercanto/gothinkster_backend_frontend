@@ -8,7 +8,7 @@ class HomeCtrl {
 
     // Filter by releaseYear
     let moviesFiltered = [];
-    movies.map((m) => {
+    movies.movies.map((m) => {
       return m.releaseYear > 1996 && moviesFiltered.push(m);
     })
 

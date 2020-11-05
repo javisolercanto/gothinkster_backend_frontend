@@ -1,0 +1,19 @@
+<!-- <div class="container" ng-repeat="serie in $ctrl.series">
+    <div class="article-meta">
+        <h2>{{ serie.title }}</h2>
+        <img src="{{serie.image}}" />
+        <button style="border-width: 0px; background-color: #5db95b; color: white; margin-bottom: 15px;"
+            ng-click="openDetails()">Show more</button>
+    </div>
+</div> -->
+
+<serie-preview
+  serie="serie"
+  ng-repeat="serie in $ctrl.list">
+</serie-preview>
+
+<serie-list-pagination
+  total-pages="$ctrl.listConfig.totalPages"
+  current-page="$ctrl.listConfig.currentPage"
+  ng-hide="$ctrl.listConfig.totalPages <= 1">
+</serie-list-pagination>
