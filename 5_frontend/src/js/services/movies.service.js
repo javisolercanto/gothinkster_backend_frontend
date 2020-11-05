@@ -8,10 +8,19 @@ export default class Movies {
     this._GQL = GraphQLClient;
   }
 
+  query(config) {
+    let request = {
+      url: this._AppConstants.api + '/movies' + ((config.type === 'feed') ? '/feed' : ''),
+      method: 'GET',
+      params: config.filters ? config.filters : null
+    };
+    return this._$http(request).then((res) => res.data);
+  }
+
   getMovies() {
     let query = `
       query {
-        movies {
+        movie (slug: "avatar-h44l8x") {
           title
           releaseYear
           director
@@ -22,15 +31,6 @@ export default class Movies {
     return this._GQL.get(query, this._AppConstants.gql + "/graphql");
   }
 
-  /* getMovies() {
-    return this._$http({
-      url: this._AppConstants.api + "/movies",
-      method: "GET",
-    }).then(res => {
-      return res.data.movies;
-    })
-  } */
-
   getMovie(slug) {
     let deferred = this._$q.defer();
 
@@ -39,15 +39,24 @@ export default class Movies {
       return deferred.promise;
     }
 
-    this._$http({
-      url: this._AppConstants.api + '/movies/' + slug,
-      method: 'GET'
-    }).then(
-      (res) => deferred.resolve(res.data.movie),
-      (err) => deferred.reject(err)
-    );
-
-    return deferred.promise;
+    let query = `
+      query {
+        movie (slug: "avatar-h44l8x") {
+          id
+          slug
+          title
+          releaseYear
+          director
+          duration
+          favoritesCount
+          author {
+            username
+            image
+          }
+        }
+      }
+    `;
+    return this._GQL.get(query, this._AppConstants.gql + "/graphql");
   }
 
   destroy(slug) {

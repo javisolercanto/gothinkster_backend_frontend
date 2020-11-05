@@ -1,0 +1,22 @@
+<movie-meta movie="$ctrl.movie">
+
+  <span ng-show="$ctrl.canModify">
+    <a class="btn btn-sm btn-outline-secondary"
+      ui-sref="app.movieEditor({ slug: $ctrl.movie.slug })">
+      <i class="ion-edit"></i> Edit Movie
+    </a>
+
+    <button class="btn btn-sm btn-outline-danger"
+      ng-class="{disabled: $ctrl.isDeleting}"
+      ng-click="$ctrl.deleteMovie()">
+      <i class="ion-trash-a"></i> Delete Movie
+    </button>
+  </span>
+
+  <span ng-hide="$ctrl.canModify">
+    <follow-btn user="$ctrl.movie.author"></follow-btn>
+    <favorite-btn movie="$ctrl.movie">
+      {{ $ctrl.movie.favorited ? 'Unfavorite' : 'Favorite' }} Movie <span class="counter">({{$ctrl.movie.favoritesCount}})</span>
+    </favorite-btn>
+  </span>
+</movie-meta>

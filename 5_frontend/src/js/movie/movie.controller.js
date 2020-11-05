@@ -1,13 +1,16 @@
-import marked from 'marked';
-
 class MovieCtrl {
-  constructor(movies, User, $scope) {
+  constructor(User, movie, $scope, $rootScope) {
     'ngInject';
 
+    this.movie = movie;
     this._$scope = $scope;
-    this._$scope.movies = movies.movies;
-    this.currentUser = User.current;
+    this._User = User;
+
+    this.currentUser = this._User.current;
+
+    $rootScope.setPageTitle(this.movie.title);
   }
 }
+
 
 export default MovieCtrl;

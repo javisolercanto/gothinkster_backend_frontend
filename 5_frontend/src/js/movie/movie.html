@@ -1,0 +1,29 @@
+<div class="article-page">
+
+  <!-- Banner for article title, action buttons -->
+  <div class="banner">
+    <div class="container">
+
+      <h1 ng-bind="$ctrl.movie.title"></h1>
+
+      <div class="article-meta">
+        <!-- Show author info + favorite & follow buttons -->
+        <movie-actions movie="$ctrl.movie"></movie-actions>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Main view. Contains movie html and reviews -->
+  <div class="container page">
+
+    <!-- Movie info section -->
+
+    <h2 style="margin-top: 20px;" ng-bind="$ctrl.movie.title"></h2>
+
+    <p ng-bind="'Director: ' + $ctrl.movie.director"></p>
+    <p ng-bind="'Duration: ' + $ctrl.movie.duration + 'h'"></p>
+    <p ng-bind="'Release Year: ' + $ctrl.movie.releaseYear"></p>
+
+  </div>
+</div>

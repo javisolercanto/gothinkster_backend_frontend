@@ -1,0 +1,10 @@
+<movie-preview
+  movie="movie"
+  ng-repeat="movie in $ctrl.list">
+</movie-preview>
+
+<movie-list-pagination
+  total-pages="$ctrl.listConfig.totalPages"
+  current-page="$ctrl.listConfig.currentPage"
+  ng-hide="$ctrl.listConfig.totalPages <= 1">
+</movie-list-pagination>

@@ -1,4 +1,4 @@
-class SerieListPaginationCtrl {
+class MovieListPaginationCtrl {
   constructor($scope) {
     'ngInject';
 
@@ -21,13 +21,13 @@ class SerieListPaginationCtrl {
 
 }
 
-let SerieListPagination= {
+let MovieListPagination= {
   bindings: {
     totalPages: '=',
     currentPage: '='
   },
-  controller: SerieListPaginationCtrl,
-  templateUrl: 'components/series-helpers/serie-list-pagination.html'
+  controller: MovieListPaginationCtrl,
+  templateUrl: 'components/movies-helpers/movie-list-pagination.html'
 };
 
-export default SerieListPagination;
+export default MovieListPagination;

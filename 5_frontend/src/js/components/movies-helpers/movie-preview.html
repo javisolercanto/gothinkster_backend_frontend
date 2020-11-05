@@ -1,0 +1,15 @@
+<div class="article-preview">
+  <movie-meta movie="$ctrl.movie">
+    <favorite-btn
+      movie="$ctrl.movie"
+      class="pull-xs-right">
+      {{$ctrl.movie.favoritesCount}}
+    </favorite-btn>
+  </movie-meta>
+
+  <a ui-sref="app.movie({ slug: $ctrl.movie.slug })" class="preview-link">
+    <h1 ng-bind="$ctrl.movie.title"></h1>
+    <p ng-bind="$ctrl.movie.director"></p>
+    <span>Read more...</span>
+  </a>
+</div>

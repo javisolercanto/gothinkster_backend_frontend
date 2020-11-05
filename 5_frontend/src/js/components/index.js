@@ -36,8 +36,18 @@ componentsModule.component('seriePreview', SeriePreview);
 import SerieMeta from './series-helpers/serie-meta.component';
 componentsModule.component('serieMeta', SerieMeta);
 
+
 import SerieFilters from './series-helpers/serie-filters.component';
 componentsModule.component('serieFilters', SerieFilters);
+
+import MoviesList from './movies-helpers/movies-list.component';
+componentsModule.component('moviesList', MoviesList);
+
+import MoviePreview from './movies-helpers/movie-preview.component';
+componentsModule.component('moviePreview',  MoviePreview);
+
+import MovieMeta from './movies-helpers/movie-meta.component';
+componentsModule.component('movieMeta', MovieMeta);
 
 import ListPagination from './article-helpers/list-pagination.component';
 componentsModule.component('listPagination', ListPagination);

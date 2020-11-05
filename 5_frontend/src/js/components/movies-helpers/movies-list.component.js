@@ -1,9 +1,9 @@
-class SeriesListCtrl {
+class MoviesListCtrl {
 
-  constructor(Series, $scope) {
+  constructor(Movies, $scope) {
     "ngInject";
 
-    this._Series = Series;
+    this._Movies = Movies;
 
     // We wait to receive the filters
     this.$onInit = () => {
@@ -53,29 +53,28 @@ class SeriesListCtrl {
     // Add the offset filter
     queryConfig.filters.offset = (this.limit * (this.listConfig.currentPage - 1));
     // Run the query
-    this._Series
+    this._Movies
       .query(queryConfig)
       .then(
         (res) => {
           this.loading = false;
 
           // Update list and total pages
-          this.list = res.series;
+          this.list = res.movies;
 
-          this.listConfig.totalPages = Math.ceil(res.seriesCount / this.limit);
+          this.listConfig.totalPages = Math.ceil(res.moviesCount / this.limit);
         }
       );
   }
 }
 
-let SeriesList = {
+let MoviesList = {
   bindings: {
     limit: '=',
-    listConfig: '=',
-    category: '='
+    listConfig: '='
   },
-  controller: SeriesListCtrl,
-  templateUrl: "components/series-helpers/series-list.html"
+  controller: MoviesListCtrl,
+  templateUrl: "components/movies-helpers/movies-list.html"
 };
 
-export default SeriesList;
+export default MoviesList;

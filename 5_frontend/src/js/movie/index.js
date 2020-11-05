@@ -7,16 +7,16 @@ let movieModule = angular.module('app.movie', []);
 import MovieConfig from './movie.config';
 movieModule.config(MovieConfig);
 
-
 // Controllers
 import MovieCtrl from './movie.controller';
 movieModule.controller('MovieCtrl', MovieCtrl);
 
-/* import ArticleActions from './movie-actions.component';
-movieModule.component('movieActions', ArticleActions); */
+import MoviesCtrl from './movies.controller';
+movieModule.controller('MoviesCtrl', MoviesCtrl);
 
-/* import Comment from './comment.component'; */
-/* movieModule.component('comment', Comment); */
+// Components
 
+import MovieActions from './movie-actions.component';
+movieModule.component('movieActions', MovieActions);
 
 export default movieModule;
