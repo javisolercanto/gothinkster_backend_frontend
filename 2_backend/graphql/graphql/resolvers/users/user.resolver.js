@@ -9,7 +9,7 @@ const resolvers = {
       users: async () => {
         return await User.find().exec();
       },
-    }
+    },
 };
 
 export default resolvers;

@@ -10,8 +10,10 @@ const typeDefs = gql`
         slug: String!
         title: String
         director: String,
-        duration: Int,
+        duration: String,
         releaseYear: Int,
+        favoritesCount: Int,
+        author: User,
     }
 `;
 
