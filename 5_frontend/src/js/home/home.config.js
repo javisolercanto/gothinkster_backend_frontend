@@ -9,12 +9,12 @@ function HomeConfig($stateProvider) {
     templateUrl: 'home/home.html',
     title: 'Home',
     resolve: {
-      movies: function (Movies, $state) {
+      /* movies: function (Movies, $state) {
         return Movies.getMovies().then(
           (movies) => movies,
           (err) => $state.go('app.home')
         )
-      },
+      }, */
       series: function (Series, $state) {
         return Series.getSeries().then(
           (series) => series,

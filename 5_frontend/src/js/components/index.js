@@ -36,7 +36,6 @@ componentsModule.component('seriePreview', SeriePreview);
 import SerieMeta from './series-helpers/serie-meta.component';
 componentsModule.component('serieMeta', SerieMeta);
 
-
 import SerieFilters from './series-helpers/serie-filters.component';
 componentsModule.component('serieFilters', SerieFilters);
 

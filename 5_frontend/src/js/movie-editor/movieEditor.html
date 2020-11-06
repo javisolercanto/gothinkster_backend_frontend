@@ -1,0 +1,92 @@
+<div class="editor-page">
+  <div class="container page">
+    <div class="row">
+      <div class="col-md-10 offset-md-1 col-xs-12">
+
+        <list-errors errors="$ctrl.errors"></list-errors>
+
+        <form name="editorForm" ng-submit="$ctrl.submitForm(true)">
+          <fieldset ng-disabled="$ctrl.isSubmitting">
+
+            <!-- Title input -->
+            <fieldset class="form-group">
+              <input class="form-control form-control-lg"
+                name="Title"
+                ng-model="$ctrl.movie.title"
+                type="text"
+                placeholder="Title*"
+                required 
+                ng-minlength="4" ng-maxlength="20"/>
+            </fieldset>
+
+            <!-- Director input -->
+            <fieldset class="form-group">
+              <input class="form-control"
+                name="Director"
+                ng-model="$ctrl.movie.director"
+                type="text"
+                placeholder="Director*"
+                required 
+                ng-minlenght="4" ng-maxlength="20"/>
+            </fieldset>
+
+            <!-- Release Year input -->
+            <fieldset class="form-group">
+              <input class="form-control"
+                name="ReleaseYear"
+                ng-model="$ctrl.movie.releaseYear"
+                type="number"
+                placeholder="Release Year*"
+                required
+                ng-minlength="1">
+            </input>
+            </fieldset>
+
+            <!-- Duration Year input -->
+            <fieldset class="form-group">
+              <input class="form-control"
+                name="Duration"
+                ng-model="$ctrl.movie.duration"
+                type="text"
+                placeholder="Duration*"
+                required
+                ng-minlength="1">
+            </input>
+            </fieldset>
+
+            <!-- Title errors -->
+            <div ng-messages="editorForm.Title.$error" style="color: red; font-weight: bold" role="alert">
+              <p ng-message="minlength">Title is too short (4-20)</p>
+              <p ng-message="maxlength">Title is too long (4-20)</p>
+            </div>
+
+            <!-- Director error -->
+            <div ng-messages="editorForm.Director.$error" style="color: red; font-weight: bold" role="alert">
+              <p ng-message="minlength">Director is too short (4-20)</p>
+              <p ng-message="maxlength">Director is too long (4-20)</p>
+            </div>
+
+            <!-- Release Year error -->
+            <div ng-messages="editorForm.ReleaseYear.$error" style="color: red; font-weight: bold" role="alert">
+              <p ng-message="minlength">Release Year is required</p>
+            </div>
+
+            <!-- Duration error -->
+            <div ng-messages="editorForm.Duration.$error" style="color: red; font-weight: bold" role="alert">
+              <p ng-message="minlength">Release Year is required</p>
+            </div>
+
+            <button class="btn btn-lg pull-xs-right btn-primary" 
+              type="button"
+              ng-click="$ctrl.submit()"
+              ng-disabled="!editorForm.Title.$valid || !editorForm.Director.$valid || !editorForm.ReleaseYear.$valid || !editorForm.Duration.$valid"
+              > Publish Movie
+            </button>
+
+          </fieldset>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

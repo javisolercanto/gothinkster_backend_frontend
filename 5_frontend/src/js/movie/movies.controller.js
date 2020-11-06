@@ -1,7 +1,7 @@
 class MoviesCtrl {
   constructor(movies, $scope) {
     'ngInject';
-    
+
     this._$scope = $scope;
     this._$scope.movies = movies;
     /**

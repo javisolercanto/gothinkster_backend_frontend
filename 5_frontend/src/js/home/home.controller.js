@@ -1,5 +1,5 @@
 class HomeCtrl {
-  constructor(movies, series, categories, User, Tags, AppConstants, $scope, $state) {
+  constructor(series, categories, User, Tags, AppConstants, $scope, $state) {
     'ngInject';
 
     this.appName = AppConstants.appName;
@@ -7,11 +7,11 @@ class HomeCtrl {
     this._$scope.categories = categories;
 
     // Filter by releaseYear
-    let moviesFiltered = [];
+    /* let moviesFiltered = [];
     movies.movies.map((m) => {
       return m.releaseYear > 1996 && moviesFiltered.push(m);
     })
-
+ */
     // Filter by seasons
     let seriesFiltered = []
     series.map((s) => {
@@ -22,7 +22,7 @@ class HomeCtrl {
       $state.go("app.serie", { filter: filter });
     }
 
-    this._$scope.movies = moviesFiltered;
+    /* this._$scope.movies = moviesFiltered; */
     this._$scope.series = seriesFiltered;
 
     // Get list of all tags

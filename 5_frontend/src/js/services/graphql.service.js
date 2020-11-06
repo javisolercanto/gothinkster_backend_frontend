@@ -61,6 +61,20 @@ export default class GraphQL {
         return deferred.promise;
     }
 
+    mutate(query, server = this._AppConstants.api_gql) {
+        let deferred = this._$q.defer();
+        if (!this._clients.has(server)) {
+            this._clients.set(server, this.createClient(server));
+        }
+        this._clients.get(server).mutate({
+            mutation: gql(query)
+        }).then(
+            (res) => deferred.resolve(res.data),
+            (err) => deferred.reject(err)
+        );
+        return deferred.promise;
+    }
+
     getAuth(query) {
         let deferred = this._$q.defer();
 

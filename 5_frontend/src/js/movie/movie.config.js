@@ -1,5 +1,5 @@
 function MovieConfig($stateProvider) {
-  'ngInject';
+  'ngInject'
 
   /**
    * Ruta que nos permite acceder al listado de movies y también
@@ -9,7 +9,7 @@ function MovieConfig($stateProvider) {
    */
   $stateProvider
     .state('app.movies', {
-      url: '/movies/:filter',
+      url: '/movies/',
       controller: 'MoviesCtrl',
       controllerAs: '$ctrl',
       templateUrl: 'movie/movies.html',
@@ -24,12 +24,12 @@ function MovieConfig($stateProvider) {
       }
     })
 
-    /**
-     * Ruta que nos permite acceder al details de una movie en
-     * concreto gracias al párametro "slug". En el resolve realizamos
-     * un GET de la movie
-     */
-    $stateProvider
+  /**
+   * Ruta que nos permite acceder al details de una movie en
+   * concreto gracias al párametro "slug". En el resolve realizamos
+   * un GET de la movie
+   */
+  $stateProvider
     .state("app.movie", {
       url: "/movies/movie/:slug",
       controller: "MovieCtrl",
@@ -42,5 +42,5 @@ function MovieConfig($stateProvider) {
         }
       }
     })
-  };
+};
 export default MovieConfig;

@@ -1,4 +1,5 @@
 export default class Movies {
+
   constructor(AppConstants, $http, $q, GraphQLClient) {
     'ngInject';
 
@@ -9,22 +10,57 @@ export default class Movies {
   }
 
   query(config) {
+    console.log(config);
+    if (!config.filters.offset) {
+      config.filters.offset = 0;
+    }
+    if (!config.filters.limit) {
+      config.filters.limit = 4;
+    }
+    let query = `
+      query {
+        moviesConfig(limit:${config.filters.limit},offset:${config.filters.offset}, type:${config.type}) {
+          movies {
+            id
+            slug
+            title
+            releaseYear
+            director
+            duration
+            favoritesCount
+            author {
+              username
+              image
+            }
+          }
+        }
+      }
+    `;
+    return this._GQL.get(query, this._AppConstants.gql + "/graphql");
     let request = {
       url: this._AppConstants.api + '/movies' + ((config.type === 'feed') ? '/feed' : ''),
       method: 'GET',
       params: config.filters ? config.filters : null
     };
-    return this._$http(request).then((res) => res.data);
+    /* return this._$http(request).then((res) => res.data); */
+    return this.getMovies();
   }
 
-  getMovies() {
+  getMovies () {
     let query = `
       query {
-        movie (slug: "avatar-h44l8x") {
+        movies {
+          id
+          slug
           title
           releaseYear
           director
           duration
+          favoritesCount
+          author {
+            username
+            image
+          }
         }
       }
     `;
@@ -41,7 +77,7 @@ export default class Movies {
 
     let query = `
       query {
-        movie (slug: "avatar-h44l8x") {
+        movie (slug: "${slug}") {
           id
           slug
           title
@@ -64,6 +100,26 @@ export default class Movies {
       url: this._AppConstants.api + '/movies/' + slug,
       method: 'DELETE'
     })
+  }
+
+  saveGQL(movie) {
+
+    let query = `
+      mutation createMovie {
+        createMovie(input:{
+          title: "${movie.title}",
+          director: "${movie.director}",
+          duration: "${movie.duration}",
+          releaseYear: ${movie.releaseYear},
+          author: "${movie.author.id}"
+        }) {
+          id
+          title
+          slug
+        }
+      }`
+
+    return this._GQL.mutate(query, this._AppConstants.gql + "/graphql");
   }
 
   save(movie) {

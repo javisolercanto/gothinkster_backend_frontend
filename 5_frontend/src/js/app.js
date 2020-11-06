@@ -24,6 +24,7 @@ import './auth';
 import './settings';
 import './editor';
 import './serie-editor';
+import './movie-editor';
 
 
 // Create and bootstrap application
@@ -41,6 +42,7 @@ const requires = [
   'app.settings',
   'app.editor',
   'app.serieEditor',
+  'app.movieEditor',
   'app.movie',
   'app.serie',
   'app.socialLogin',
