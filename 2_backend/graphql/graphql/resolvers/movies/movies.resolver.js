@@ -12,6 +12,13 @@ const resolvers = {
         }
 
     },
+    Mutation: {
+        createMovie: (root, { input }) => {
+            let movie = new Movie(input);
+            movie.save();
+            return movie;
+        }
+    },
     Movie: {
         author: async (parent) => {
             return await (await User.findById(parent.author)

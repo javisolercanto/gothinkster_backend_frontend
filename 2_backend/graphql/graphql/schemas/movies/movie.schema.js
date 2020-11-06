@@ -5,6 +5,9 @@ const typeDefs = gql`
         movie(slug: String!): Movie
         movies: [Movie]
     }
+    extend type Mutation {
+        createMovie(input: MovieInput): Movie
+    }
     type Movie {
         id: ID!
         slug: String!
@@ -14,6 +17,13 @@ const typeDefs = gql`
         releaseYear: Int,
         favoritesCount: Int,
         author: User,
+    }
+    input MovieInput {
+        title: String!
+        director: String
+        duration: String
+        releaseYear: Int
+        author: String
     }
 `;
 

@@ -6,6 +6,9 @@ const Query = gql`
         message: String
         authenticationError: String
     }
+    type Mutation {
+        _empty: String
+    }
 `;
 
 import Serie from "../../graphql/schemas/series/serie.schema";
