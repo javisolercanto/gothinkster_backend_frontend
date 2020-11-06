@@ -17,6 +17,43 @@ router.param('movie', function(req, res, next, slug) {
     }).catch(next);
 });
 
+// Return feed
+router.get('/feed', auth.required, function(req, res, next) {
+  var limit = 20;
+  var offset = 0;
+
+  if(typeof req.query.limit !== 'undefined'){
+    limit = req.query.limit;
+  }
+
+  if(typeof req.query.offset !== 'undefined'){
+    offset = req.query.offset;
+  }
+
+  User.findById(req.payload.id).then(function(user){
+    if (!user) { return res.sendStatus(401); }
+
+    Promise.all([
+      Movie.find({ author: {$in: user.following}})
+        .limit(Number(limit))
+        .skip(Number(offset))
+        .populate('author')
+        .exec(),
+      Movie.count({ author: {$in: user.following}})
+    ]).then(function(results){
+      var movies = results[0];
+      var moviesCount = results[1];
+
+      return res.json({
+        movies: movies.map(function(movie){
+          return movie.toJSONFor(user);
+        }),
+        moviesCount: moviesCount
+      });
+    }).catch(next);
+  });
+});
+
 // Save register
 router.post('/', auth.required, function(req, res, next) {
   User.findById(req.payload.id).then(function(user){
