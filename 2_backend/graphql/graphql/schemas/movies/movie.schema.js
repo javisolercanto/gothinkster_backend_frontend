@@ -4,6 +4,7 @@ const typeDefs = gql`
     extend type Query {
         movie(slug: String!): Movie
         movies: [Movie]
+        moviesConfig(limit: Int, offset: Int, type: String, userid: String): [Movie]
     }
     extend type Mutation {
         createMovie(input: MovieInput): Movie
