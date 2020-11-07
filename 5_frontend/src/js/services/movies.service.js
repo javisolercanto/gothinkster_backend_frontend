@@ -19,21 +19,20 @@ export default class Movies {
     }
     let query = `
       query {
-        moviesConfig(limit:${config.filters.limit},offset:${config.filters.offset}, type:${config.type}) {
-          movies {
-            id
-            slug
-            title
-            releaseYear
-            director
-            duration
-            favoritesCount
-            author {
-              username
-              image
-            }
+        moviesConfig(limit:${config.filters.limit},offset:${config.filters.offset}, type:"${config.type}", userid:"${config.user.id}") {
+          id
+          slug
+          title
+          releaseYear
+          director
+          duration
+          favoritesCount
+          author {
+            username
+            image
           }
         }
+        moviesCount
       }
     `;
     return this._GQL.get(query, this._AppConstants.gql + "/graphql");

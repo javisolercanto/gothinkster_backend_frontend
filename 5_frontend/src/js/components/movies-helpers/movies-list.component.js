@@ -1,8 +1,9 @@
 class MoviesListCtrl {
 
-  constructor(Movies, $scope) {
+  constructor(User, Movies, $scope) {
     "ngInject";
 
+    this._User = User;
     this._Movies = Movies;
 
     // We wait to receive the filters
@@ -39,7 +40,8 @@ class MoviesListCtrl {
     // Create an object for this query
     let queryConfig = {
       type: this.listConfig.type || undefined,
-      filters: this.listConfig.filters || {}
+      filters: this.listConfig.filters || {},
+      user: this._User.getCurrent(),
     };
 
     // Set the limit filter from the component's attribute
@@ -60,7 +62,7 @@ class MoviesListCtrl {
           this.loading = false;
 
           // Update list and total pages
-          this.list = res.movies;
+          this.list = res.moviesConfig;
 
           this.listConfig.totalPages = Math.ceil(res.moviesCount / this.limit);
         }
