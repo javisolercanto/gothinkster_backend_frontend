@@ -10,7 +10,7 @@ const resolvers = {
         movies: async () => {
             return Movie.find().exec();
         },
-        moviesConfig: async (root, {limit, offset, type, userid}) => {
+        moviesConfig: async (root, { limit, offset, type, userid }) => {
             if (type === 'feed') {
                 let current = await User.findById(userid).populate('following');
                 let movies = await Movie.find().populate('author').exec();
@@ -18,8 +18,11 @@ const resolvers = {
                 movies.map((movie) => current.following.map((user) => user.username === movie.author.username && m.push(movie)));
                 return m.splice(offset, limit)
             } else {
-                return Movie.find().skip(offset).limit(limit).exec(); 
-            }            
+                return Movie.find().skip(offset).limit(limit).exec();
+            }
+        },
+        moviesCount: () => {
+            return Movie.count().exec();
         },
 
     },
