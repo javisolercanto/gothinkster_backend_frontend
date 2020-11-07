@@ -7,6 +7,7 @@ router.use('/series', require('./series'));
 router.use('/articles', require('./articles'));
 router.use('/categories', require('./categories'));
 router.use('/tags', require('./tags'));
+router.use('/request', require('./request'));
 
 
 router.use(function(err, req, res, next){
