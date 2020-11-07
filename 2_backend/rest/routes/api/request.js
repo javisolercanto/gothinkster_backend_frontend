@@ -3,6 +3,10 @@ var auth = require('../auth');
 var fetch = require('node-fetch');
 const axios = require("axios")
 
+/**
+ * ===== FETCH =====
+ * GET Movies by an author id. Get Author by rest and get movies by GRAPHQL
+ */
 router.get('/movie-by-author/:author', auth.optional, function (req, res, next) {
     fetch('http://localhost:3000/api/user/find/' + req.params.author)
         .then(function (response) {
@@ -44,7 +48,10 @@ router.get('/movie-by-author/:author', auth.optional, function (req, res, next) 
             console.error(err);
         });
 });
-
+/**
+ * ===== AXIOS =====
+ * GET Movies by a serie slug. Get author by rest with serie.sluf and get movies by author by GRAPHQL
+ */
 router.get('/movie-by-serie/:serie', auth.optional, function (req, res, next) {
     axios({
         url: 'http://localhost:3000/api/series/find/' + req.params.serie,
