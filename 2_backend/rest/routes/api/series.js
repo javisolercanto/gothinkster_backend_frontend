@@ -164,6 +164,13 @@ router.get('/:serie', auth.optional, function (req, res, next) {
   }).catch(next);
 });
 
+// Get a serie :slug
+router.get('/find/:slug', auth.optional, function (req, res, next) {
+  Serie.findOne({slug: req.params.slug}).populate('author').then(function (serie) {
+    return res.json({ serie: serie });
+  }).catch(next);
+});
+
 // Update a serie
 router.put('/:serie', auth.required, function (req, res, next) {
   User.findById(req.payload.id).then(function (user) {

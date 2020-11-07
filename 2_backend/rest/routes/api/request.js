@@ -1,8 +1,9 @@
 var router = require('express').Router();
 var auth = require('../auth');
 var fetch = require('node-fetch');
+const axios = require("axios")
 
-router.get('/common/:author', auth.optional, function (req, res, next) {
+router.get('/movie-by-author/:author', auth.optional, function (req, res, next) {
     fetch('http://localhost:3000/api/user/find/' + req.params.author)
         .then(function (response) {
             return response.json();
@@ -42,6 +43,41 @@ router.get('/common/:author', auth.optional, function (req, res, next) {
         .catch(function (err) {
             console.error(err);
         });
+});
+
+router.get('/movie-by-serie/:serie', auth.optional, function (req, res, next) {
+    axios({
+        url: 'http://localhost:3000/api/series/find/' + req.params.serie,
+        method: 'get',
+    }).then((result) => {
+        console.log(result.data.serie.author._id);
+        axios({
+            url: 'http://localhost:3002/api/graphql/',
+            method: 'post',
+            data: {
+                query: `
+                query {
+                    moviesByAuthor(author: "${result.data.serie.author._id}") {
+                        id
+                        slug
+                        title
+                        releaseYear
+                        director
+                        duration
+                        favoritesCount
+                        author {
+                            username
+                            image
+                            email
+                            bio
+                        }
+                    }
+                }`
+            }
+        }).then((result) => {
+            return res.json({movies: result.data.data.moviesByAuthor});
+        }).catch(next);
+    });
 });
 
 module.exports = router;
