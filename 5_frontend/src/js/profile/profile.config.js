@@ -31,21 +31,21 @@ function ProfileConfig($stateProvider) {
     controllerAs: '$ctrl',
     templateUrl: 'profile/profile-series.html',
     title: 'Favorites'
-  });
-  /* .state('app.profile.main', {
+  })
+  .state('app.profile.mainMovies', {
     url:'',
-    controller: 'ProfileArticlesCtrl',
+    controller: 'ProfileMoviesCtrl',
     controllerAs: '$ctrl',
-    templateUrl: 'profile/profile-articles.html',
+    templateUrl: 'profile/profile-movies.html',
     title: 'Profile'
   })
-  .state('app.profile.favorites', {
+  .state('app.profile.favoritesMovies', {
     url:'/favorites',
-    controller: 'ProfileArticlesCtrl',
+    controller: 'ProfileMoviesCtrl',
     controllerAs: '$ctrl',
-    templateUrl: 'profile/profile-articles.html',
+    templateUrl: 'profile/profile-movies.html',
     title: 'Favorites'
-  }); */
+  });
 
 };
 

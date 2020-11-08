@@ -24,12 +24,11 @@ class MovieEditorCtrl {
 
     let author = this._User.getCurrent();
     if (author) {
-      console.log(author);
       this.movie.author = author.id;
 
       this._Movies.saveGQL(this.movie).then(
-        (newMovie) => {
-          this._$state.go('app.movie', { slug: newMovie.slug });
+        (res) => {
+          this._$state.go('app.movie', { slug: res.createMovie.slug });
         },
   
         (err) => {

@@ -45,7 +45,7 @@ export default class Movies {
     return this.getMovies();
   }
 
-  getMovies () {
+  getMovies() {
     let query = `
       query {
         movies {
@@ -102,15 +102,14 @@ export default class Movies {
   }
 
   saveGQL(movie) {
-
     let query = `
-      mutation createMovie {
+      mutation {
         createMovie(input:{
           title: "${movie.title}",
           director: "${movie.director}",
           duration: "${movie.duration}",
           releaseYear: ${movie.releaseYear},
-          author: "${movie.author.id}"
+          author: "${movie.author}"
         }) {
           id
           title

@@ -17,5 +17,8 @@ profileModule.controller('ProfileArticlesCtrl', ProfileArticlesCtrl); */
 import ProfileSeriesCtrl from './profile-series.controller';
 profileModule.controller('ProfileSeriesCtrl', ProfileSeriesCtrl);
 
+import ProfileMoviesCtrl from './profile-movies.controller';
+profileModule.controller('ProfileMoviesCtrl', ProfileMoviesCtrl);
+
 
 export default profileModule;
