@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var faker = require('faker');
 var serieUtils = require('./serieUtils');
 var userUtils = require('./userUtils');
+var fetch = require('node-fetch');
 var Serie = mongoose.model('Serie');
 var Review = mongoose.model('Review');
 
@@ -24,8 +25,16 @@ router.get('/add/:qty', async function (req, res, next) {
             // We take a random user 
             serie.author = await userUtils.GetRandomUser();
 
-            await serie.save();
-            series.push(serie);
+            // Check if there's no user inside database
+            if (serie.author) {
+                await serie.save();
+                series.push(serie);
+            } else {
+                fetch('http://localhost:3000/seed/users/add/1')
+                    .then(function(response) {
+                        if (response.users.length > 0) serie.author = response.users[0] ;
+                    })
+            }
         }
 
         return res.status(201).send({ series, "count": series.length });
