@@ -7,6 +7,9 @@ const resolvers = {
         movie: (root, { slug }) => {
             return Movie.findOne({ slug: slug }).exec();
         },
+        moviesByAuthor: async (root, { author }) => {
+            return await Movie.find({ author: author }).populate('author').exec();;
+        },
         movies: async () => {
             return Movie.find().exec();
         },

@@ -3,6 +3,7 @@ import { gql } from 'apollo-server-express';
 const typeDefs = gql`
     extend type Query {
         movie(slug: String!): Movie
+        moviesByAuthor(author: String!): [Movie]
         movies: [Movie]
         moviesConfig(limit: Int, offset: Int, type: String, userid: String): [Movie]
         moviesCount: Int
