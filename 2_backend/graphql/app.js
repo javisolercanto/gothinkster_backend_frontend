@@ -35,6 +35,7 @@ function mongooseConnect() {
       mongoose.set('useUnifiedTopology', true);
       try {
         mongoose.connect('mongodb://localhost/conduit_nodejs');
+        // mongoose.connect('mongodb://mongo/conduit_nodejs');
       } catch (error) {
         console.log(error);
         
