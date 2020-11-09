@@ -1,0 +1,34 @@
+version: "2"
+
+services:
+  rest:
+    build: .
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    links: 
+      - 'mongo'
+    depends_on:
+      - 'mongo'
+
+  # graphql:
+  #   build: ./graphql/
+  #   volumes:
+  #     - ./:/app
+  #     - /app/node_modules
+  #   ports:
+  #     - "3002:3002"
+  #   links: 
+  #     - 'mongo'
+  #   depends_on:
+  #     - 'mongo'
+
+
+  mongo:
+    image: mongo
+    ports:
+      - '27017:27017'
+    volumes:
+      - /data/db
