@@ -78,4 +78,4 @@ We can generate random series. The same as users side with:
 localhost:3000/seed/users/:qty
 ```
 
-![Javier Soler Cantó Logo](https://raw.githubusercontent.com/javisolercanto/logos/master/logo_negro.png?token=AK2MCFIVZM3NDUIOUE7HNO27WLSNO
+![Javier Soler Cantó Logo](https://raw.githubusercontent.com/javisolercanto/logos/master/logo_negro.png?token=AK2MCFIVZM3NDUIOUE7HNO27WLSNO)
