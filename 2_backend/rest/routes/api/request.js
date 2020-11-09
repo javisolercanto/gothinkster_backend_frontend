@@ -1,6 +1,6 @@
 var router = require('express').Router();
 var auth = require('../auth');
-var fetch = require('node-fetch');
+const fetch = require('node-fetch');
 const axios = require("axios")
 
 /**
@@ -57,7 +57,6 @@ router.get('/movie-by-serie/:serie', auth.optional, function (req, res, next) {
         url: 'http://localhost:3000/api/series/find/' + req.params.serie,
         method: 'get',
     }).then((result) => {
-        console.log(result.data.serie.author._id);
         axios({
             url: 'http://localhost:3002/api/graphql/',
             method: 'post',
