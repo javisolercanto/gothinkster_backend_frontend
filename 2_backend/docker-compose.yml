@@ -1,0 +1,35 @@
+services:
+  rest:
+      image: node
+      command: npm run dev
+      restart: on-failure
+      working_dir: /app
+      volumes:
+          - ./rest:/app
+      ports:
+          - "3000:3000"
+      links: 
+          - 'mongo'
+      depends_on:
+          - 'mongo'
+
+  graphql:
+      image: node
+      command: npm run dev
+      restart: on-failure
+      working_dir: /app
+      volumes:
+          - ./graphql:/app
+      ports:
+          - "3002:3002"
+      links: 
+          - 'mongo'
+      depends_on:
+          - 'mongo'
+
+  mongo:
+      image: mongo
+      ports:
+          - "27017:27017"
+      volumes:
+          - /data/db
